@@ -110,7 +110,7 @@ STATICFILES_FINDERS = (
 
 # Website settings
 
-SECRET_KEY = '4-k!uzdys*3ib8sf*f+^!2f9%$t&+lx0(9gc1hyi9ipk+%5p#$'
+SECRET_KEY = os.environ['TIMGORIN_SECRET_KEY']
 
 SITE_ID = 1
 
