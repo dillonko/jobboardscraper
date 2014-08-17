@@ -14,17 +14,6 @@ ALLOWED_HOSTS = [
     '*'
 ]
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'postgresql_psycopg2',
-        'NAME': 'de9uoqaen05kog',
-        'USER': 'djiukvczxnujsg',
-        'PASSWORD': '7aD5FqVejEq7PLjweBFIgV2-aj',
-        'HOST': 'ec2-54-83-201-54.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
-
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
