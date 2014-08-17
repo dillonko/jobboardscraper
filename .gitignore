@@ -4,6 +4,7 @@
 
 # Heroku
 */settings/local.py
+staticfiles
 
 
 # Official Python .gitignore
