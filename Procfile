@@ -1,0 +1,1 @@
+web: gunicorn timgorin.wsgi --log-file -

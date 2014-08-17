@@ -10,17 +10,24 @@ DEBUG = False
 TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = [
-    '.timgorin.com'
+    'timgorin.herokuapp.com',
+    '*'
 ]
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-# MEDIA_ROOT = '/home/richardcornish/webapps/richardcornish_assets/media/'
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+# MEDIA_ROOT = ''
+# MEDIA_URL = ''
 
-# MEDIA_URL = 'http://assets.richardcornish.com/media/'
 
-# STATIC_ROOT = '/home/richardcornish/webapps/richardcornish_assets/static/'
+# Heroku configuration
 
-# STATIC_URL = 'http://assets.richardcornish.com/static/'
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
