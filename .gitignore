@@ -2,6 +2,10 @@
 *.DS_Store
 
 
+# Heroku
+*/settings/local.py
+
+
 # Official Python .gitignore
 # https://github.com/github/gitignore/blob/master/Python.gitignore
 
