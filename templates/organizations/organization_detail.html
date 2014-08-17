@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load tz %}
+
+
+{% block title %}{{ organization.title }} &#183; {{ block.super }}{% endblock %}
+
+
+{% block content %}
+
+<h1>{{ organization.title }}</h1>
+
+<h2>Contact</h2>
+
+<p><a href="mailto:{{ organization.email }}">{{ organization.email }}</a></p>
+
+<h2>Jobs</h2>
+
+<ul>
+    {% for job in organization.job_set.all %}
+    <li>
+        <a href="{{ job.get_absolute_url }}" rel="external">{{ job.title }}</a><br>
+        {{ job.pub_date|localtime }}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

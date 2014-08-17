@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load tz %}
+
+
+{% block title %}Jobs &#183; {{ block.super }}{% endblock %}
+
+
+{% block content %}
+
+<h1>Jobs</h1>
+
+<p>{{ job_count }} job{{ job_count|pluralize }}</p>
+
+<ul>
+    {% for job in job_list %}
+    <li>
+        <a href="{{ job.get_absolute_url }}" rel="external">{{ job.title }}</a><br>
+        <a href="{{ job.organization.get_absolute_url }}">{{ job.organization }}</a><br>
+        {{ job.pub_date|localtime }}
+    </li>
+    {% endfor %}    
+</ul>
+
+{% include 'includes/pagination.html' with view='job_list_pages' %}
+
+{% endblock %}

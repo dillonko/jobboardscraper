@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{{ site.name }}{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header>
+    <p><a href="{% url 'home' %}">{{ site.name }}</a></p>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'job_list' %}">Jobs</a></li>
+        <li><a href="{% url 'organization_list' %}">Organizations</a></li>
+    </ul>
+</nav>
+
+<main>
+    {% block content %}
+    {% endblock %}    
+</main>
+
+<footer>
+    <p>&copy; {% now "Y" %}. {{ site.name }}</p>
+</footer>
+
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>
