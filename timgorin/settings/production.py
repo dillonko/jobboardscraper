@@ -5,7 +5,7 @@ Production settings
 from timgorin.settings.base import *
 
 
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = False
 
