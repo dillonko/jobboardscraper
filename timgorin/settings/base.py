@@ -116,4 +116,4 @@ SITE_ID = 1
 
 PAGINATE_BY = 25
 
-GEOIP_DATABASE = os.path.join(PROJECT_ROOT, 'GeoIP.dat')
+GEOIP_DATABASE = os.path.join(PROJECT_ROOT, 'GeoLiteCity.dat')
