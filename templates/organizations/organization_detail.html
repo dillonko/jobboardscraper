@@ -10,9 +10,10 @@
 
 <h1>{{ organization.title }}</h1>
 
+{% if organization.email %}
 <h2>Contact</h2>
-
 <p><a href="mailto:{{ organization.email }}">{{ organization.email }}</a></p>
+{% endif %}
 
 <h2>Jobs</h2>
 
@@ -22,6 +23,8 @@
         <a href="{{ job.get_absolute_url }}" rel="external">{{ job.title }}</a><br>
         {{ job.pub_date|localtime }}
     </li>
+    {% empty %}
+    <li>No jobs available.</li>
     {% endfor %}
 </ul>
 
