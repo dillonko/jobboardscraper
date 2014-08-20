@@ -21,11 +21,15 @@ class ScraperPipeline(object):
     def process_item(self, item, spider):
         item['title'] = item['title'][0]
         item['organization'] = self.get_organization(item['org_title'], item['org_email'])
+        item['body'] = item['body'][0]
         item['pub_date'] = self.get_datetime(item['pub_date'])
         if not Job.objects.filter(title=item['title'], pub_date=item['pub_date']):
             item.save()
         else:
-            raise DropItem('Job already exists.')
+            job = Job.objects.get(title=item['title'], pub_date=item['pub_date'])
+            job.body = item['body']
+            job.save()
+            # raise DropItem('Job already exists.')
         return item
 
     def get_organization(self, title, email):

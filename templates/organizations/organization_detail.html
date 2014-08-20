@@ -20,7 +20,7 @@
 <ul>
     {% for job in organization.job_set.all %}
     <li>
-        <a href="{{ job.get_absolute_url }}" rel="external">{{ job.title }}</a><br>
+        <a href="{{ job.get_absolute_url }}">{{ job.title }}</a><br>
         {{ job.pub_date|localtime }}
     </li>
     {% empty %}

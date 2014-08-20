@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load tz %}
+
+
+{% block title %}{{ job.title }} &#183; {{ block.super }}{% endblock %}
+
+
+{% block content %}
+
+<h1>{{ job.title }}</h1>
+
+<p>{{ job.pub_date|localtime }}</p>
+
+{% if job.organization %}
+<h2>Organization</h2>
+<p><a href="{{ job.organization.get_absolute_url }}">{{ job.organization.title }}</a></p>
+{% if job.organization.email %}
+<p><a href="mailto:{{ job.organization.email }}">{{ job.organization.email }}</a></p>
+{% endif %}
+{% endif %}
+
+<div class="body">
+    {{ job.body|safe }}
+</div>
+
+<h2>Source</h2>
+<p><a href="{{ job.url }}" rel="external">{{ job.url }}</a></p>
+
+{% endblock %}

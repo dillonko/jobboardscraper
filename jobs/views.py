@@ -1,7 +1,13 @@
 from django.conf import settings
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 
 from jobs.models import Job
+
+
+class JobDetailView(DetailView):
+    model = Job
+
+job_detail = JobDetailView.as_view()
 
 
 class JobListView(ListView):

@@ -18,6 +18,7 @@ class EslCafeSpider(CrawlSpider):
     def parse_item(self, response):
         job = JobItem()
         job['title'] = response.xpath('/html/head/title/text()').extract()
+        job['body'] = response.xpath('/html/body/blockquote/font').extract()
         job['url'] = response.url
         job['pub_date'] = response.xpath('(/html/body/p)[3]/strong/br/following-sibling::text()').extract()
         job['scrape_date'] = timezone.now()
