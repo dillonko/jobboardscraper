@@ -4,7 +4,20 @@ from django.core.urlresolvers import reverse
 from organizations.models import Organization
 
 
+class Board(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True)
+    url = models.URLField('URL')
+
+    class Meta:
+        ordering = ['title']
+
+    def __unicode__(self):
+        return u'%s' % self.title
+
+
 class Job(models.Model):
+    board = models.ForeignKey(Board)
     title = models.CharField(max_length=255)
     organization = models.ForeignKey(Organization, blank=True, null=True)
     body = models.TextField()

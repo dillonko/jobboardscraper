@@ -12,13 +12,14 @@ from datetime import datetime
 from django.utils.text import slugify
 from scrapy.exceptions import DropItem
 
-from jobs.models import Job
+from jobs.models import Board, Job
 from organizations.models import Organization
 
 
 class ScraperPipeline(object):
 
     def process_item(self, item, spider):
+        item['board'] = self.get_board(item['board_title'], item['board_url'])
         item['title'] = item['title'][0]
         item['organization'] = self.get_organization(item['org_title'], item['org_email'])
         item['body'] = item['body'][0]
@@ -28,6 +29,13 @@ class ScraperPipeline(object):
         else:
             raise DropItem('Job already exists.')
         return item
+
+    def get_board(self, title, url):
+        slug = slugify(title)
+        if not Board.objects.filter(slug=slug):
+            return Board.objects.create(title=title, slug=slug, url=url)
+        else:
+            return Board.objects.get(slug=slug)
 
     def get_organization(self, title, email):
         title = title[0]
