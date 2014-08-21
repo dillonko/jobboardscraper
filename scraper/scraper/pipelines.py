@@ -26,10 +26,7 @@ class ScraperPipeline(object):
         if not Job.objects.filter(title=item['title'], pub_date=item['pub_date']):
             item.save()
         else:
-            job = Job.objects.get(title=item['title'], pub_date=item['pub_date'])
-            job.body = item['body']
-            job.save()
-            # raise DropItem('Job already exists.')
+            raise DropItem('Job already exists.')
         return item
 
     def get_organization(self, title, email):
