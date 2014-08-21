@@ -39,7 +39,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # 'middleware.timezones.TimezoneMiddleware',
     'easy_timezones.middleware.EasyTimezoneMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
