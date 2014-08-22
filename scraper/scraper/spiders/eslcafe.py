@@ -15,6 +15,9 @@ class EslCafeSpider(CrawlSpider):
         Rule(LinkExtractor(allow=['http://www\.eslcafe\.com/jobs/korea/index\.cgi\?read=\d+']), callback='parse_item')
     ]
 
+    board_title = u'Dave\'s ESL Cafe'
+    board_url = u'http://www.eslcafe.com/jobs/korea/'
+
     def parse_item(self, response):
         job = JobItem()
         job['title'] = response.xpath('/html/head/title/text()').extract()
@@ -22,8 +25,8 @@ class EslCafeSpider(CrawlSpider):
         job['url'] = response.url
         job['pub_date'] = response.xpath('(/html/body/p)[3]/strong/br/following-sibling::text()').extract()
         job['scrape_date'] = timezone.now()
-        job['board_title'] = 'Dave\'s ESL Cafe'
-        job['board_url'] = 'http://www.eslcafe.com/jobs/korea/'
+        job['board_title'] = self.board_title
+        job['board_url'] = self.board_url
         job['org_title'] = response.xpath('(/html/body/p)[3]/strong/big/text()').extract()
         job['org_email'] = response.xpath('(/html/body/p)[3]/strong/a/text()').extract()
         yield job
