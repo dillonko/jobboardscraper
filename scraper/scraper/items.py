@@ -13,5 +13,7 @@ from jobs.models import Job
 
 class JobItem(DjangoItem):
     django_model = Job
+    board_title = scrapy.Field()
+    board_url = scrapy.Field()
     org_title = scrapy.Field()
     org_email = scrapy.Field()
