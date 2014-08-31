@@ -12,6 +12,10 @@
 
 <p>{{ job.pub_date|localtime }}</p>
 
+<div class="body">
+    {{ job.body|safe }}
+</div>
+
 {% if job.organization %}
 <h2>Organization</h2>
 <p><a href="{{ job.organization.get_absolute_url }}">{{ job.organization.title }}</a></p>
@@ -19,10 +23,6 @@
 <p><a href="mailto:{{ job.organization.email }}">{{ job.organization.email }}</a></p>
 {% endif %}
 {% endif %}
-
-<div class="body">
-    {{ job.body|safe }}
-</div>
 
 <h2>Source</h2>
 <p><a href="{{ job.board.url }}">{{ job.board.title }}</a></p>
