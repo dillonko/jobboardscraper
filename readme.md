@@ -11,6 +11,8 @@ Heroku add-ons I used:
 - [Heroku Scheduler](https://addons.heroku.com/scheduler)
 - [Heroku Postgres](https://addons.heroku.com/heroku-postgresql)
 
+Scrapy requires a Scrapy project to be created, changing into its project directory, and then running the spider. Therefore, the task for the Scheduler is `(cd scraper && scrapy crawl eslcafe)`.
+
 Resources that helped me:
 
 - [hk0weather](https://github.com/sammyfung/hk0weather) Hong Kong weather data project by [Sammy Fung](http://sammy.hk/)
