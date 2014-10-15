@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from jobs.models import Board, Job
+from .models import Board, Job
 
 
 class BoardAdmin(admin.ModelAdmin):

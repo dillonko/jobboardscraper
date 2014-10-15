@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from organizations.models import Organization
+from .models import Organization
 
 
 class OrganizationAdmin(admin.ModelAdmin):
