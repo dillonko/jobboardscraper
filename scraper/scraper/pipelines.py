@@ -30,7 +30,7 @@ class EslCafePipeline(object):
         )
         item['body'] = item['body'][0]
         item['pub_date'] = self.convert_to_datetime(item['pub_date'])
-        self.create_job(item['title'], item['pub_date'])
+        return self.create_job(item['title'], item['pub_date'])
 
     def create_job(self, title, pub_date):
         """
