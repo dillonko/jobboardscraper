@@ -1,6 +1,6 @@
-Richard = window.Richard || {};
+TimGorin = window.TimGorin || {};
 
-Richard = (function ($) {
+TimGorin = (function ($) {
 
     'use strict';
 
@@ -24,5 +24,5 @@ Richard = (function ($) {
 
 jQuery(function () {
     'use strict';
-    Richard.init();
+    TimGorin.init();
 });
