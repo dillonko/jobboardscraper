@@ -66,6 +66,13 @@ class EslCafePipeline(object):
             return Organization.objects.create(title=title, slug=slug, email=email)
 
     def convert_to_datetime(self, pub_list):
+        """
+        Converts messy datetime to timezone-aware datetime object;
+        the webmaster seems to live in Northridge, CA, which is near Los 
+        Angeles and is in the Pacific Time timezone
+        http://www.eslcafe.com/contact.html
+        http://en.wikipedia.org/wiki/America/Los_Angeles
+        """
         pub_string = pub_list[0]
         pub_string = re.sub('Date: ', '', pub_string)
         pub_string = re.sub('a.m.', 'AM', pub_string)
