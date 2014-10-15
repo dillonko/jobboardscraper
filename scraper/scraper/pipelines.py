@@ -19,37 +19,53 @@ from organizations.models import Organization
 class EslCafePipeline(object):
 
     def process_item(self, item, spider):
-        item['board'] = self.get_board(item['board_title'], item['board_url'])
+        item['board'] = self.get_or_create_board
+            item['board_title'],
+            item['board_url']
+        )
         item['title'] = item['title'][0]
-        item['organization'] = self.get_organization(item['org_title'], item['org_email'])
+        item['organization'] = self.get_or_create_organization(
+            item['org_title'],
+            item['org_email']
+        )
         item['body'] = item['body'][0]
-        item['pub_date'] = self.get_datetime(item['pub_date'])
-        if not Job.objects.filter(title=item['title'], pub_date=item['pub_date']):
+        item['pub_date'] = self.convert_to_datetime(item['pub_date'])
+        self.create_job(item['title'], item['pub_date'])
+
+    def create_job(self, title, pub_date):
+        """
+        There is no native unique identifier for each job: a job with the same 
+        title might be a job we already scraped or it can be a new job with 
+        the same title (essentially a "reposted" job); therefore we pair the 
+        job title with the published date to determine if a job is "unique 
+        enough" to warrant a new entry
+        """
+        if not Job.objects.filter(title=title, pub_date=pub_date):
             item.save()
         else:
             raise DropItem('Job already exists.')
         return item
 
-    def get_board(self, title, url):
+    def get_or_create_board(self, title, url):
         slug = slugify(title)
-        if not Board.objects.filter(slug=slug):
-            return Board.objects.create(title=title, slug=slug, url=url)
-        else:
+        try:
             return Board.objects.get(slug=slug)
+        except:
+            return Board.objects.create(title=title, slug=slug, url=url)
 
-    def get_organization(self, title, email):
+    def get_or_create_organization(self, title, email):
         title = title[0]
         slug = slugify(title)
         try:
             email = email[0].lower()
         except IndexError:
             email = ''
-        if not Organization.objects.filter(slug=slug):
-            return Organization.objects.create(title=title, slug=slug, email=email)
-        else:
+        try:
             return Organization.objects.get(slug=slug)
+        except:
+            return Organization.objects.create(title=title, slug=slug, email=email)
 
-    def get_datetime(self, pub_list):
+    def convert_to_datetime(self, pub_list):
         pub_string = pub_list[0]
         pub_string = re.sub('Date: ', '', pub_string)
         pub_string = re.sub('a.m.', 'AM', pub_string)
