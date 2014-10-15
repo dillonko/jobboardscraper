@@ -18,5 +18,5 @@ NEWSPIDER_MODULE = 'scraper.spiders'
 
 
 ITEM_PIPELINES = {
-    'scraper.pipelines.ScraperPipeline': 300,
+    'scraper.pipelines.EslCafePipeline': 300,
 }

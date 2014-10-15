@@ -16,7 +16,7 @@ from jobs.models import Board, Job
 from organizations.models import Organization
 
 
-class ScraperPipeline(object):
+class EslCafePipeline(object):
 
     def process_item(self, item, spider):
         item['board'] = self.get_board(item['board_title'], item['board_url'])
