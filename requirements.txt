@@ -1,6 +1,5 @@
 Django==1.7
 Scrapy==0.24.4
-South==1.0
 Twisted==14.0.0
 cffi==0.8.6
 characteristic==0.1.0
