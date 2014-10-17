@@ -32,5 +32,6 @@ HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
         'URL': os.environ.get('BONSAI_URL') + '/haystack',
+        'INDEX_NAME': 'haystack',
     },
 }
