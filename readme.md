@@ -1,41 +1,47 @@
 # Job board scraper
 
-This code scrapes a job board daily with [Scrapy](http://scrapy.org/) and integrates it into a [Django](https://www.djangoproject.com/) website with a [PostgreSQL](http://www.postgresql.org/) database. The website is hosted on [Heroku](https://www.heroku.com/).
+This code scrapes a job board with [Scrapy](http://scrapy.org/) every day and integrates it into a [Django](https://www.djangoproject.com/) website with an [Elasticsearch](http://www.elasticsearch.org/) search index and a [PostgreSQL](http://www.postgresql.org/) database. The website is hosted on [Heroku](https://www.heroku.com/).
 
 The deployed website: [http://timgorin.herokuapp.com](http://timgorin.herokuapp.com/)
 
-## Scrapy notes
+## Installation
 
-To run the spider to scrape the website:
+Prerequisites: [Python](https://www.python.org/), [PostgreSQL](http://www.postgresql.org/), [Pip](https://pip.pypa.io/), [virtualenv](http://virtualenv.readthedocs.org/), [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/).
 
-1. `cd ~/Sites/timgorin/`
-2. `workon timgorin`
-3. `cd scraper`
-4. `scrapy crawl eslcafe`
+1. `mkvirtualenv timgorin`
+2. `git clone git@github.com:richardcornish/timgorin.git`
+3. `add2virtualenv timgorin`
+4. `cd timgorin`
+5. `pip install -r requirements.txt`
+6. `python manage.py migrate`
+7. `python manage.py runserver`
+8. Open [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-## Elasticsearch notes
+You will need to [generate](http://www.miniwebtool.com/django-secret-key-generator/) a [`SECRET_KEY`](https://docs.djangoproject.com/en/dev/ref/settings/#secret-key) environment variable to run the website: `export TIMGORIN_SECRET_KEY='...'`.
 
-To update the index to search the website:
+To run the spider to scrape the website: `cd scraper && scrapy crawl eslcafe`
+
+Elasticsearch is required to update the search index:
 
 1. Install [Java JDK and Java JRE](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 2. `brew install elasticsearch`
 3. `elasticsearch --config=/usr/local/opt/elasticsearch/config/elasticsearch.yml`
-5. `cd ~/Sites/timgorin/`
-4. `workon timgorin`
-6. `python manage.py rebuild_index` (or `update_index` subsequently)
+4. `python manage.py update_index` (or `rebuild_index` the first time).
 
 ## Heroku notes
 
 Heroku add-ons I used:
 
-- [Heroku Scheduler](https://addons.heroku.com/scheduler)
 - [Heroku Postgres](https://addons.heroku.com/heroku-postgresql)
-- [Bonsai Elasticsearch](https://addons.heroku.com/bonsai)
+- [Heroku Scheduler](https://addons.heroku.com/scheduler)
+- [SearchBox Elasticsearch](https://addons.heroku.com/searchbox)
 
-The Scheduler needs to run a tasks to scrape the website and to update the search index.
+The Scheduler needs to run these tasks every day to scrape the website and update the search index:
 
 - `(cd scraper && scrapy crawl eslcafe)`
 - `python manage.py update_index`
+
+You might need to edit the [SearchBox settings](https://dashboard.searchly.com/6886/indices) on your Heroku dashboard to manually register your SearchBox API key and your search index's name.
 
 Resources that helped me:
 
