@@ -28,9 +28,8 @@ STATIC_URL = '/static/'
 # MEDIA_URL = ''
 
 
-import urlparse
 
-ES_URL = urlparse(os.environ.get('BONSAI_URL') or 'http://127.0.0.1:9200/')
+ES_URL = os.environ.get('BONSAI_URL')
  
 HAYSTACK_CONNECTIONS = {
     'default': {
