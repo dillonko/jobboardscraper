@@ -5,6 +5,14 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
+
+# TODO: Figure out how to properly load models with Django 1.7's AppConfig
+# https://docs.djangoproject.com/en/1.7/ref/applications/
+# This is a gross hack that brings me great shame
+import django
+django.setup()
+
+
 import re
 import pytz
 from datetime import datetime
@@ -19,20 +27,12 @@ from organizations.models import Organization
 class EslCafePipeline(object):
 
     def process_item(self, item, spider):
-        item['board'] = self.get_or_create_board
-            item['board_title'],
-            item['board_url']
-        )
+        item['board'] = self.get_or_create_board(item['board_title'], item['board_url'])
         item['title'] = item['title'][0]
-        item['organization'] = self.get_or_create_organization(
-            item['org_title'],
-            item['org_email']
-        )
+        item['organization'] = self.get_or_create_organization(item['org_title'], item['org_email'])
         item['body'] = item['body'][0]
         item['pub_date'] = self.convert_to_datetime(item['pub_date'])
-        return self.create_job(item['title'], item['pub_date'])
 
-    def create_job(self, title, pub_date):
         """
         There is no native unique identifier for each job: a job with the same 
         title might be a job we already scraped or it can be a new job with 
@@ -40,7 +40,7 @@ class EslCafePipeline(object):
         job title with the published date to determine if a job is "unique 
         enough" to warrant a new entry
         """
-        if not Job.objects.filter(title=title, pub_date=pub_date):
+        if not Job.objects.filter(title=item['title'], pub_date=item['pub_date']):
             item.save()
         else:
             raise DropItem('Job already exists.')
@@ -50,7 +50,7 @@ class EslCafePipeline(object):
         slug = slugify(title)
         try:
             return Board.objects.get(slug=slug)
-        except:
+        except Board.DoesNotExist:
             return Board.objects.create(title=title, slug=slug, url=url)
 
     def get_or_create_organization(self, title, email):
@@ -62,7 +62,7 @@ class EslCafePipeline(object):
             email = ''
         try:
             return Organization.objects.get(slug=slug)
-        except:
+        except Organization.DoesNotExist:
             return Organization.objects.create(title=title, slug=slug, email=email)
 
     def convert_to_datetime(self, pub_list):

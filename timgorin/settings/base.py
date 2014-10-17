@@ -116,14 +116,3 @@ SITE_ID = 1
 PAGINATE_BY = 25
 
 GEOIP_DATABASE = os.path.join(PROJECT_ROOT, 'GeoLiteCity.dat')
-
-
-# Haystack
-
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
-        'INDEX_NAME': 'haystack',
-    },
-}
