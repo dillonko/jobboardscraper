@@ -31,7 +31,7 @@ STATIC_URL = '/static/'
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'https://4ayozlr:h5ww2lmryzca7iqz@holly-2519000.us-east-1.bonsai.io:443/',
+        'URL': os.environ.get('BONSAI_URL'),
         'INDEX_NAME': 'haystack',
     },
 }
