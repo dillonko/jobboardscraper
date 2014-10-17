@@ -39,9 +39,6 @@ HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
         'URL': es.scheme + '://' + es.hostname + ':' + str(port),
-        'INDEX_NAME': 'documents',
+        'INDEX_NAME': 'haystack',
     },
 }
-
-if es.username:
-    HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
