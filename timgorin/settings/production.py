@@ -27,11 +27,16 @@ STATIC_URL = '/static/'
 # MEDIA_ROOT = ''
 # MEDIA_URL = ''
 
-# Haystack
+
+ES_URL = urlparse(os.environ.get('BONSAI_URL') or 'http://127.0.0.1:9200/')
+ 
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': os.environ.get('BONSAI_URL'),
+        'URL': ES_URL.scheme + '://' + ES_URL.hostname + ':80',
         'INDEX_NAME': 'haystack',
     },
 }
+ 
+if ES_URL.username:
+    HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": ES_URL.username + ':' + ES_URL.password}
