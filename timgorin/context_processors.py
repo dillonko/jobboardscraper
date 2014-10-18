@@ -5,13 +5,13 @@ from search.forms import MySearchForm
 
 def site(request):
     """
-    Gets current website and adds it to the request context.
+    Gets current website
     """
     return {'site': get_current_site(request)}
 
 
 def search_form(request):
     """
-    Gets current website and adds it to the request context.
+    Gets unbound search form class
     """
     return {'search_form': MySearchForm}
