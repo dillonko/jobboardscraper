@@ -43,6 +43,8 @@ The Scheduler needs to run these tasks every day to scrape the website and updat
 
 You might need to edit the [SearchBox settings](https://dashboard.searchly.com/6886/indices) on your Heroku dashboard to manually register your SearchBox API key and your search index's name.
 
+## Resources
+
 Resources that helped me:
 
 - [hk0weather](https://github.com/sammyfung/hk0weather) Hong Kong weather data project by [Sammy Fung](http://sammy.hk/)
