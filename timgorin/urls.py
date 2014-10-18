@@ -1,10 +1,8 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
 from django.contrib import admin
-admin.autodiscover()
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = patterns('',
@@ -20,12 +18,10 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
-    # Haystack
-    (r'^search/', include('haystack.urls')),
-
     # Public website
     url(r'^jobs/', include('jobs.urls')),
     url(r'^organizations/', include('organizations.urls')),
+    url(r'^search/', include('search.urls')),
     url(r'^$', 'timgorin.views.home', name='home'),
 
 )
