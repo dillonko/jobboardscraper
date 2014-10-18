@@ -8,4 +8,10 @@ class MySearchForm(SearchForm):
 
     def search(self):
         sqs = super(MySearchForm, self).search()
+
+        if not self.is_valid():
+            return self.no_query_found()
+
+        sqs = sqs.order_by('-pub_date')
+
         return sqs
