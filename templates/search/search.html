@@ -18,14 +18,17 @@
 
 {% if query %}
 
+    {% if page.object_list %}
+        <h2>Results {{ page.start_index }}&#8211;{{ page.end_index }} of {{ page.paginator.count }}</h2>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+
     {% for result in page.object_list %}
-    <h2>Results {{ page.start_index }}&#8211;{{ page.end_index }} of {{ page.paginator.count }}</h2>
     <div class="result">
         <p><a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a></p>
         <p>{% highlight result.object.body with query %}</p>
     </div>
-    {% empty %}
-    <p>No results found.</p>
     {% endfor %}
 
     {% if page.has_previous or page.has_next %}
