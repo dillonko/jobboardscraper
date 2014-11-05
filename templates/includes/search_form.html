@@ -3,16 +3,16 @@
 <form method="get" action="{% url 'search' %}">
 
     {% for field in search_form %}
-    	{% if field.is_hidden %}
-    		{{ field }}
-    	{% else %}
-	        {{ field.errors }}
-	        <p><span class="sr-only">{{ field.label_tag }}</span></p>
-	        <p>{{ field }}</p>
+        {% if field.is_hidden %}
+            {{ field }}
+        {% else %}
+            {{ field.errors }}
+            <p><span class="sr-only">{{ field.label_tag }}</span></p>
+            <p>{{ field }}</p>
             {% if field.help_text %}
-    	        <p>{{ field.help_text }}</p>
+                <p>{{ field.help_text }}</p>
             {% endif %}
-	    {% endif %}
+        {% endif %}
     {% endfor %}
 
     <p><button type="submit">Search</button></p>
