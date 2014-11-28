@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load tz %}
+{% load tz humanize %}
 
 
 {% block title %}Jobs &#183; {{ block.super }}{% endblock %}
@@ -10,7 +10,7 @@
 
 <h1>Jobs</h1>
 
-<p>{{ job_count }} job{{ job_count|pluralize }}</p>
+<p>{{ job_count|intcomma }} job{{ job_count|pluralize }}</p>
 
 <ul>
     {% for job in job_list %}
