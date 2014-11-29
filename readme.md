@@ -17,7 +17,7 @@ Prerequisites: [Python](https://www.python.org/), [PostgreSQL](http://www.postgr
 7. `python manage.py runserver`
 8. Open [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-You will need to [generate](http://www.miniwebtool.com/django-secret-key-generator/) a [`SECRET_KEY`](https://docs.djangoproject.com/en/dev/ref/settings/#secret-key) environment variable to run the website: `export TIMGORIN_SECRET_KEY='...'`.
+You will need to [generate](http://www.miniwebtool.com/django-secret-key-generator/) a [`SECRET_KEY`](https://docs.djangoproject.com/en/dev/ref/settings/#secret-key) environment variable to run the website. Append to `~/.bash_profile` and restart: `export TIMGORIN_SECRET_KEY='...'`.
 
 To run the spider to scrape the website: `cd scraper && scrapy crawl eslcafe`
 
@@ -29,6 +29,13 @@ Elasticsearch is required to update the search index:
 4. `python manage.py update_index` (or `rebuild_index` the first time).
 
 ## Heroku notes
+
+Heroku requires some [environment variables](https://devcenter.heroku.com/articles/config-vars):
+
+```
+heroku config:set DJANGO_SETTINGS_MODULE=timgorin.settings.production
+heroku config:set TIMGORIN_SECRET_KEY=...
+```
 
 Heroku add-ons I used:
 
