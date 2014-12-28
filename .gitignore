@@ -6,6 +6,10 @@
 staticfiles
 
 
+# Virtualenv
+venv
+
+
 # Official Python .gitignore
 # https://github.com/github/gitignore/blob/master/Python.gitignore
 
@@ -22,6 +26,7 @@ env/
 build/
 develop-eggs/
 dist/
+downloads/
 eggs/
 lib/
 lib64/
@@ -33,7 +38,7 @@ var/
 *.egg
 
 # PyInstaller
-#  Usually these files are written by a python script from a template 
+#  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
