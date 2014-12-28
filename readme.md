@@ -8,7 +8,7 @@ The deployed website: [http://timgorin.herokuapp.com](http://timgorin.herokuapp.
 
 Prerequisites: [Python](https://www.python.org/), [PostgreSQL](http://www.postgresql.org/), [Pip](https://pip.pypa.io/), [virtualenv](http://virtualenv.readthedocs.org/), [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/), and [Git](http://git-scm.com/).
 
-You will need to [generate](http://www.miniwebtool.com/django-secret-key-generator/) a [`SECRET_KEY`](https://docs.djangoproject.com/en/dev/ref/settings/#secret-key) environment variable to run the website. Append to `export TIMGORIN_SECRET_KEY='...'` to `~/.bash_profile` and restart Terminal.
+You will need to [generate](http://www.miniwebtool.com/django-secret-key-generator/) a [`SECRET_KEY`](https://docs.djangoproject.com/en/dev/ref/settings/#secret-key) environment variable to run the website. Append `export TIMGORIN_SECRET_KEY='...'` to `~/.bash_profile` and restart Terminal.
 
 1. `mkvirtualenv timgorin`
 2. `git clone git@github.com:richardcornish/timgorin.git`
