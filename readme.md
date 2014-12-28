@@ -33,8 +33,7 @@ Elasticsearch is required to update the search index:
 Heroku requires some [environment variables](https://devcenter.heroku.com/articles/config-vars):
 
 ```
-heroku config:set DJANGO_SETTINGS_MODULE=timgorin.settings.production
-heroku config:set TIMGORIN_SECRET_KEY=...
+heroku config:set TIMGORIN_SECRET_KEY='...'
 ```
 
 Heroku add-ons I used:
