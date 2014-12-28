@@ -7,11 +7,11 @@ TimGorin = (function ($) {
     return {
 
         openLinkInNewWindow: function () {
-            $('a.external, a[rel="external"]').on('click', function (e) {
+            $('a.external, a[rel="external"]').on('click', function (event) {
                 var href;
                 href = $(this).attr('href');
                 window.open(href);
-                e.preventDefault();
+                event.preventDefault();
             });
         },
 
