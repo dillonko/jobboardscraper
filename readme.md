@@ -6,16 +6,16 @@ The deployed website: [http://timgorin.herokuapp.com](http://timgorin.herokuapp.
 
 ## Installation
 
-Prerequisites: [Python](https://www.python.org/), [PostgreSQL](http://www.postgresql.org/), [Pip](https://pip.pypa.io/), [virtualenv](http://virtualenv.readthedocs.org/), [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/).
+Prerequisites: [Python](https://www.python.org/), [PostgreSQL](http://www.postgresql.org/), [Pip](https://pip.pypa.io/), [virtualenv](http://virtualenv.readthedocs.org/), [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/), and [Git](http://git-scm.com/).
 
-You will need to [generate](http://www.miniwebtool.com/django-secret-key-generator/) a [`SECRET_KEY`](https://docs.djangoproject.com/en/dev/ref/settings/#secret-key) environment variable to run the website. Append to `~/.bash_profile` and restart Terminal: `export TIMGORIN_SECRET_KEY='...'`.
+You will need to [generate](http://www.miniwebtool.com/django-secret-key-generator/) a [`SECRET_KEY`](https://docs.djangoproject.com/en/dev/ref/settings/#secret-key) environment variable to run the website. Append to `export TIMGORIN_SECRET_KEY='...'` to `~/.bash_profile` and restart Terminal.
 
 1. `mkvirtualenv timgorin`
 2. `git clone git@github.com:richardcornish/timgorin.git`
 3. `add2virtualenv timgorin`
 4. `cd timgorin`
 5. `pip install -r requirements.txt`
-6. `python manage.py migrate`
+6. `python manage.py syncdb`
 7. `python manage.py runserver`
 8. Open [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
@@ -34,15 +34,15 @@ Elasticsearch (and thus Java) is required to update the search index. Assuming [
 1. Install [Java JDK and Java JRE](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 2. `brew install elasticsearch`
 3. `elasticsearch --config=/usr/local/opt/elasticsearch/config/elasticsearch.yml`
-4. `python manage.py update_index` (or `rebuild_index` the first time).
+4. `python manage.py rebuild_index` (or `python manage.py update_index` subsequent times).
 
 ## Heroku notes
 
 Heroku requires some [environment variables](https://devcenter.heroku.com/articles/config-vars):
 
 ```
-heroku config:set DJANGO_SETTINGS_MODULE='timgorin.settings.production'
 heroku config:set TIMGORIN_SECRET_KEY='...'
+heroku config:set DJANGO_SETTINGS_MODULE='timgorin.settings.production'
 heroku config:set WEB_CONCURRENCY='2'
 ```
 
