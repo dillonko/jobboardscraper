@@ -1,4 +1,4 @@
-TimGorin = window.TimGorin || {};
+var TimGorin = window.TimGorin || {};
 
 TimGorin = (function ($) {
 
