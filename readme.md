@@ -49,6 +49,7 @@ heroku config:set WEB_CONCURRENCY='2'
 Heroku add-ons I used:
 
 - [Heroku Postgres](https://addons.heroku.com/heroku-postgresql)
+- [Heroku PG Backups](https://addons.heroku.com/pgbackups)
 - [Heroku Scheduler](https://addons.heroku.com/scheduler)
 - [SearchBox Elasticsearch](https://addons.heroku.com/searchbox)
 
