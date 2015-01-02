@@ -62,9 +62,9 @@ You might need to edit the [SearchBox settings](https://dashboard.searchly.com/6
 
 If you're running commands straight on Heroku:
 
-- Scrape job board: `heroku run '(cd scraper && scrapy crawl eslcafe)'`
-- Update search index: `heroku run python manage.py update_index`
-- [Deploy](https://devcenter.heroku.com/articles/git#deploying-code) website: `git push heroku master`
+- `heroku run '(cd scraper && scrapy crawl eslcafe)'`
+- `heroku run python manage.py update_index`
+- `git push heroku master`
 
 ## Resources
 
