@@ -9,8 +9,7 @@
 # TODO: Figure out how to properly load models with Django 1.7's AppConfig
 # https://docs.djangoproject.com/en/1.7/ref/applications/
 # This is a gross hack that brings me great shame
-import django
-django.setup()
+
 
 
 import re
