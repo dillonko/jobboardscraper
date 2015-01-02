@@ -27,7 +27,7 @@ ITEM_PIPELINES = {
 import os, sys
 
 # Set Django settings module
-os.environ['DJANGO_SETTINGS_MODULE'] = 'timgorin.settings.local'
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'timgorin.settings.local'
 
 # Add project to Python path
 path = os.path.dirname(os.path.dirname(__file__))
