@@ -21,19 +21,6 @@ ITEM_PIPELINES = {
 }
 
 
-# Django Item requires explicit Django settings in Scrapy settings
-# http://doc.scrapy.org/en/latest/topics/djangoitem.html
-
-import os, sys
-
-# Set Django settings module
-# os.environ['DJANGO_SETTINGS_MODULE'] = 'timgorin.settings.local'
-
-# Add project to Python path
-path = os.path.dirname(os.path.dirname(__file__))
-sys.path.append(os.path.join(path, os.pardir))
-
-
 # Although not documented anywhere, I *think* Scrapy falls under the
 # use case of `AppRegistryNotReady` error "if you forget to call
 # django.setup() in a standalone Python script."
