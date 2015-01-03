@@ -71,7 +71,7 @@ Consult Heroku's "[Getting started with Django on Heroku](https://devcenter.hero
 After installation you can then run the commands straight to Heroku:
 
 - `heroku run '(cd scraper && scrapy crawl eslcafe)'`
-- `heroku run python manage.py update_index`
+- `heroku run python manage.py rebuild_index`
 - `git push heroku master`
 
 You will more likely want to run the Scheduler, which needs to run these tasks every day to scrape the website and update the search index:
