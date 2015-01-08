@@ -21,6 +21,7 @@ REPOSITORY_ROOT = os.path.join(PROJECT_ROOT, os.pardir)
 
 INSTALLED_APPS = (
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.humanize',
