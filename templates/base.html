@@ -8,6 +8,7 @@
     <title>{% block title %}{{ site.name }}{% endblock %}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
@@ -33,11 +34,11 @@
 </main>
 
 <footer>
-    <p>&copy; {% now "Y" %}. {{ site.name }}</p>
+    <p>&copy; {% now "Y" %}. <a href="{% url 'home' %}">{{ site.name }}</a>.</p>
 </footer>
 
-<script src="{% static 'js/jquery.js' %}"></script>
-<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/jquery-1.11.2.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
 
 </body>
 </html>
