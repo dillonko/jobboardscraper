@@ -6,27 +6,48 @@ The deployed website: [http://timgorin.herokuapp.com](http://timgorin.herokuapp.
 
 ## Installation
 
-Prerequisites: [Python](https://www.python.org/), [PostgreSQL](http://www.postgresql.org/), [Pip](https://pip.pypa.io/), [virtualenv](http://virtualenv.readthedocs.org/), [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/), and [Git](http://git-scm.com/).
+Prerequisites: [Python](https://www.python.org/), [SQLite](http://www.sqlite.org/), [pip](https://pip.pypa.io/), [virtualenv](http://virtualenv.readthedocs.org/), [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/), and [Git](http://git-scm.com/).
 
-You will need to [generate](http://www.miniwebtool.com/django-secret-key-generator/) a [`SECRET_KEY`](https://docs.djangoproject.com/en/dev/ref/settings/#secret-key) environment variable to run the website.
+Generate a [Django Secret Key](http://www.miniwebtool.com/django-secret-key-generator/). Append to `~/.bash_profile` and restart Terminal:
 
-Append `export TIMGORIN_SECRET_KEY='...'` to `~/.bash_profile` and restart Terminal.
+```
+export FRIENDLYDJANGO_SECRET_KEY='...'
+```
 
-1. `cd ~/Sites/`
-2. `git clone git@github.com:richardcornish/timgorin.git`
-3. `mkvirtualenv timgorin`
-4. `add2virtualenv timgorin`
-5. `cd timgorin`
-6. `pip install -r requirements.txt`
-7. `python manage.py syncdb`
-8. `python manage.py runserver`
-9. Open [http://127.0.0.1:8000](http://127.0.0.1:8000)
-10. `deactivate`
+Download and sync:
 
-[Setting a default directory](https://virtualenvwrapper.readthedocs.org/en/latest/command_ref.html#command-setvirtualenvproject) to the clone is usually a good idea:
+```
+cd ~/Sites/
+git clone git@github.com:richardcornish/timgorin.git
+mkvirtualenv timgorin
+add2virtualenv timgorin
+cd timgorin
+pip install -r requirements.txt
+python manage.py syncdb && python manage.py migrate
+python manage.py loaddata fixtures/*
+python manage.py runserver
+```
+
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Kill with `Ctrl+C`.
+
+Set a virtualenv default directory:
 
 ```
 setvirtualenvproject ~/.virtualenvs/timgorin/ ~/Sites/timgorin/
+```
+
+Start to work again:
+
+```
+workon timgorin
+deactivate
+```
+
+Future syncing:
+
+```
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 ## Scrape
@@ -49,14 +70,25 @@ Elasticsearch (and thus Java) is required to update the search index. Assuming [
 3. `elasticsearch --config=/usr/local/opt/elasticsearch/config/elasticsearch.yml`
 4. `python manage.py rebuild_index` (or `python manage.py update_index` subsequent times).
 
-## Heroku notes
+## Deployment
+
+The code is set up to deploy to [Heroku](https://www.heroku.com/).
 
 Heroku requires some [environment variables](https://devcenter.heroku.com/articles/config-vars):
 
 ```
+heroku create
 heroku config:set TIMGORIN_SECRET_KEY='...'
-heroku config:set DJANGO_SETTINGS_MODULE='timgorin.settings.production'
+heroku config:set DEBUG=''
 heroku config:set WEB_CONCURRENCY='2'
+heroku addons:add heroku-postgresql
+heroku addons:add pgbackups
+heroku addons:add scheduler
+heroku addons:add searchbox
+git push heroku master
+heroku run python manage.py syncdb
+heroku run python manage.py loaddata fixtures/*
+heroku open
 ```
 
 Heroku add-ons I installed:
@@ -66,13 +98,21 @@ Heroku add-ons I installed:
 - [Heroku Scheduler](https://addons.heroku.com/scheduler)
 - [SearchBox Elasticsearch](https://addons.heroku.com/searchbox)
 
-Consult Heroku's "[Getting started with Django on Heroku](https://devcenter.heroku.com/articles/getting-started-with-django)" article on production installation.
+Future deploys:
+
+```
+git push heroku master
+heroku run python manage.py migrate
+```
 
 After installation you can then run the commands straight to Heroku:
 
-- `heroku run '(cd scraper && scrapy crawl eslcafe)'`
-- `heroku run python manage.py rebuild_index`
-- `git push heroku master`
+```
+heroku run '(cd scraper && scrapy crawl eslcafe)'
+heroku run python manage.py rebuild_index
+```
+
+Consult Heroku's "[Getting started with Django on Heroku](https://devcenter.heroku.com/articles/getting-started-with-django)" article on production installation.
 
 You will more likely want to run the Scheduler, which needs to run these tasks every day to scrape the website and update the search index:
 

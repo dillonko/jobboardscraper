@@ -112,6 +112,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+STATICFILES_FINDERS = (
+    # 'django.contrib.staticfiles.finders.FileSystemFinder',
+    # 'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
@@ -129,6 +134,10 @@ TEMPLATE_DIRS = (
 TEMPLATE_CONTEXT_PROCESSORS += (
     'timgorin.context_processors.site',
     'timgorin.context_processors.search_form',
+)
+TEMPLATE_LOADERS = (
+    # 'django.template.loaders.filesystem.Loader',
+    # 'django.template.loaders.app_directories.Loader',
 )
 
 
