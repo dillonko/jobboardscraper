@@ -16,6 +16,7 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Website settings
 
@@ -34,7 +35,7 @@ PAGINATE_BY = 25
 
 REMOVE_WWW = True
 
-GEOIP_DATABASE = os.path.join(BASE_DIR, 'GeoLiteCity.dat')
+GEOIP_DATABASE = os.path.join(PROJECT_DIR, 'GeoLiteCity.dat')
 
 INTERNAL_IPS = (
     '127.0.0.1',
@@ -78,7 +79,6 @@ WSGI_APPLICATION = 'timgorin.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:////{0}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
@@ -106,11 +106,10 @@ ALLOWED_HOSTS = ['*']
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(PROJECT_DIR, 'static'),
 )
 STATICFILES_FINDERS = (
     # 'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -129,7 +128,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/1.7/ref/templates/
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(PROJECT_DIR, 'templates'),
 )
 TEMPLATE_CONTEXT_PROCESSORS += (
     'timgorin.context_processors.site',
@@ -143,17 +142,15 @@ TEMPLATE_LOADERS = (
 
 # Media
 
-BASE_DIR = os.path.join(BASE_DIR, os.pardir)
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
 # Haystack
 
-import os
 from urlparse import urlparse
 
-es = urlparse(os.environ.get('SEARCHBOX_URL') or 'http://127.0.0.1:9200/')
+es = urlparse(os.environ.get('SEARCHBOX_URL', 'http://127.0.0.1:9200/'))
 
 port = es.port or 80
 
