@@ -1,17 +1,12 @@
 # Apple
 *.DS_Store
 
+# Database
+db.sqlite3
 
 # Heroku
-staticfiles
-
-
-# Virtualenv
 venv
-
-
-# Official Python .gitignore
-# https://github.com/github/gitignore/blob/master/Python.gitignore
+staticfiles
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
