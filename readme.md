@@ -79,6 +79,7 @@ Heroku requires some [environment variables](https://devcenter.heroku.com/articl
 ```
 heroku create
 heroku config:set TIMGORIN_SECRET_KEY='...'
+heroku config:set DJANGO_SETTINGS_MODULE='timgorin.settings'
 heroku config:set DEBUG=''
 heroku config:set WEB_CONCURRENCY='2'
 heroku addons:add heroku-postgresql
