@@ -1,7 +1,21 @@
-from django.views.generic import TemplateView
+from django.conf import settings
+from django.views.generic import TemplateView, RedirectView
 
 
-class HomeView(TemplateView):
+class HomeTemplateView(TemplateView):
     template_name = 'home.html'
 
-home = HomeView.as_view()
+home = HomeTemplateView.as_view()
+
+
+class RobotsTemplateView(TemplateView):
+    template_name = 'robots.txt'
+    content_type = 'text/plain'
+
+robots = RobotsTemplateView.as_view()
+
+
+class FaviconRedirectView(RedirectView):
+    url = '%simg/favicon.ico' % settings.STATIC_URL
+
+favicon = FaviconRedirectView.as_view()

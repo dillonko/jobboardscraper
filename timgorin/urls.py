@@ -18,10 +18,13 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
+
     # Public website
     url(r'^jobs/', include('jobs.urls')),
     url(r'^organizations/', include('organizations.urls')),
     url(r'^search/', include('search.urls')),
+    url(r'^robots\.txt$', 'friendlydjango.views.robots', name='robots'),
+    url(r'^favicon\.ico$', 'friendlydjango.views.favicon', name='favicon'),
     url(r'^$', 'timgorin.views.home', name='home'),
 
 )
