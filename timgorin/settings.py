@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Website settings
 
-SECRET_KEY = os.environ.get('FRIENDLYDJANGO_SECRET_KEY')
+SECRET_KEY = os.environ.get('TIMGORIN_SECRET_KEY')
 
 DEBUG = os.environ.get('DEBUG', True)
 

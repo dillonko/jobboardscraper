@@ -11,7 +11,7 @@ Prerequisites: [Python](https://www.python.org/), [SQLite](http://www.sqlite.org
 Generate a [Django Secret Key](http://www.miniwebtool.com/django-secret-key-generator/). Append to `~/.bash_profile` and restart Terminal:
 
 ```
-export FRIENDLYDJANGO_SECRET_KEY='...'
+export TIMGORIN_SECRET_KEY='...'
 ```
 
 Download and sync:
