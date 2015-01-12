@@ -13,5 +13,7 @@ class JobIndex(indexes.SearchIndex, indexes.Indexable):
         return Job
 
     def index_queryset(self, using=None):
-        """Used when the entire index for model is updated."""
+        """
+        Used when the entire index for model is updated.
+        """
         return self.get_model().objects.filter(pub_date__lte=datetime.datetime.now())
