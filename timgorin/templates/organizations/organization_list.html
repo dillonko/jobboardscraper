@@ -10,7 +10,7 @@
 
 <h1>Organizations</h1>
 
-<p>{{ organization_list|length|intcomma }} organization{{ organization_list|pluralize }}</p>
+<p>{{ organization_count|intcomma }} organization{{ organization_count|pluralize }}</p>
 
 <ul>
     {% for organization in organization_list %}
