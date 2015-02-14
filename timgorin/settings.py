@@ -102,6 +102,10 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
+# Other security
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
@@ -152,7 +156,7 @@ port = es.port or 80
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': es.scheme + '://' + es.hostname + ':' + str(port),
+        'URL': '%s://%s:%s' % (es.scheme, es.hostname, port),
         'INDEX_NAME': 'haystack',
     },
 }
