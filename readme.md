@@ -6,34 +6,53 @@ The deployed website: [http://timgorin.herokuapp.com](http://timgorin.herokuapp.
 
 ## Installation
 
-Prerequisites: [Python](https://www.python.org/), [SQLite](http://www.sqlite.org/), [pip](https://pip.pypa.io/), [virtualenv](http://virtualenv.readthedocs.org/), [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/), and [Git](http://git-scm.com/).
+Prerequisites:
 
-Generate a [Django Secret Key](http://www.miniwebtool.com/django-secret-key-generator/). Append to `~/.bash_profile` and restart Terminal:
+- [Python](https://www.python.org/)
+- [SQLite](http://www.sqlite.org/)
+- [pip](https://pip.pypa.io/)
+- [virtualenv](http://virtualenv.readthedocs.org/)
+- [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/)
+- [Git](http://git-scm.com/)
+
+Your `~/.bash_profile`:
 
 ```
+# Paths
+export PATH=/usr/local/bin:$PATH
+
+# Virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+
+# Tim Gorin
 export TIMGORIN_SECRET_KEY='...'
 ```
 
-Download and sync:
+Replace `...` with a [Django Secret Key](http://www.miniwebtool.com/django-secret-key-generator/) and restart Terminal.
+
+Download and install:
 
 ```
-cd ~/Sites/
+mkdir -p ~/Sites/ && cd ~/Sites/
 git clone git@github.com:richardcornish/timgorin.git
 mkvirtualenv timgorin
-add2virtualenv timgorin
-cd timgorin
+cd timgorin/
 pip install -r requirements.txt
-python manage.py syncdb && python manage.py migrate
+add2virtualenv timgorin/
+cd timgorin/
+python manage.py migrate
 python manage.py loaddata fixtures/*
+python manage.py createsuperuser
 python manage.py runserver
 ```
 
 Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Kill with `Ctrl+C`.
 
-Set a virtualenv default directory:
+Setting a virtualenv default directory is usually a good idea:
 
 ```
-setvirtualenvproject ~/.virtualenvs/timgorin/ ~/Sites/timgorin/
+setvirtualenvproject $WORKON_HOME/timgorin/ ~/Sites/timgorin/timgorin/
 ```
 
 Start to work again:
@@ -43,7 +62,7 @@ workon timgorin
 deactivate
 ```
 
-Future syncing:
+Future database changes:
 
 ```
 python manage.py makemigrations
@@ -56,7 +75,7 @@ To run the spider to scrape the website:
 
 ```
 workon timgorin
-cd scraper
+cd ../scraper/
 scrapy crawl eslcafe
 deactivate
 ```
@@ -73,6 +92,13 @@ Elasticsearch (and thus Java) is required to update the search index. Assuming [
 ## Deployment
 
 The code is set up to deploy to [Heroku](https://www.heroku.com/).
+
+Heroku add-ons I installed:
+
+- [Heroku Postgres](https://addons.heroku.com/heroku-postgresql)
+- [Heroku PG Backups](https://addons.heroku.com/pgbackups)
+- [Heroku Scheduler](https://addons.heroku.com/scheduler)
+- [SearchBox Elasticsearch](https://addons.heroku.com/searchbox)
 
 Heroku requires some [environment variables](https://devcenter.heroku.com/articles/config-vars):
 
@@ -92,14 +118,9 @@ heroku run python manage.py loaddata fixtures/*
 heroku open
 ```
 
-Heroku add-ons I installed:
-
-- [Heroku Postgres](https://addons.heroku.com/heroku-postgresql)
-- [Heroku PG Backups](https://addons.heroku.com/pgbackups)
-- [Heroku Scheduler](https://addons.heroku.com/scheduler)
-- [SearchBox Elasticsearch](https://addons.heroku.com/searchbox)
-
 Future deploys:
+
+Commit your files with Git.
 
 ```
 git push heroku master
@@ -109,7 +130,7 @@ heroku run python manage.py migrate
 After installation you can then run the commands straight to Heroku:
 
 ```
-heroku run '(cd scraper && scrapy crawl eslcafe)'
+heroku run '(cd ../scraper/ && scrapy crawl eslcafe)'
 heroku run python manage.py rebuild_index
 ```
 
@@ -117,7 +138,7 @@ Consult Heroku's "[Getting started with Django on Heroku](https://devcenter.hero
 
 You will more likely want to run the Scheduler, which needs to run these tasks every day to scrape the website and update the search index:
 
-- `(cd scraper && scrapy crawl eslcafe)`
+- `(cd ../scraper/ && scrapy crawl eslcafe)`
 - `python manage.py update_index`
 
 You might need to edit the [SearchBox settings](https://dashboard.searchly.com/6886/indices) on your Heroku dashboard to manually register your SearchBox API key and your search index's name.

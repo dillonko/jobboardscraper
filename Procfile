@@ -1,1 +1,1 @@
-web: gunicorn timgorin.wsgi --workers $WEB_CONCURRENCY --log-file -
+web: gunicorn timgorin.wsgi --pythonpath timgorin --workers $WEB_CONCURRENCY --log-file -
