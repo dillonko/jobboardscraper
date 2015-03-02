@@ -113,8 +113,9 @@ heroku addons:add pgbackups
 heroku addons:add scheduler
 heroku addons:add searchbox
 git push heroku master
-heroku run python manage.py syncdb
-heroku run python manage.py loaddata fixtures/*
+heroku run python timgorin/manage.py migrate
+heroku run python timgorin/manage.py loaddata fixtures/*
+heroku run python timgorin/manage.py createsuperuser
 heroku open
 ```
 
@@ -124,22 +125,22 @@ Commit your files with Git.
 
 ```
 git push heroku master
-heroku run python manage.py migrate
+heroku run python timgorin/manage.py migrate
 ```
 
 After installation you can then run the commands straight to Heroku:
 
 ```
-heroku run '(cd ../scraper/ && scrapy crawl eslcafe)'
-heroku run python manage.py rebuild_index
+heroku run '(cd scraper/ && scrapy crawl eslcafe)'
+heroku run python timgorin/manage.py rebuild_index
 ```
 
 Consult Heroku's "[Getting started with Django on Heroku](https://devcenter.heroku.com/articles/getting-started-with-django)" article on production installation.
 
 You will more likely want to run the Scheduler, which needs to run these tasks every day to scrape the website and update the search index:
 
-- `(cd ../scraper/ && scrapy crawl eslcafe)`
-- `python manage.py update_index`
+- `(cd scraper/ && scrapy crawl eslcafe)`
+- `python timgorin/manage.py update_index`
 
 You might need to edit the [SearchBox settings](https://dashboard.searchly.com/6886/indices) on your Heroku dashboard to manually register your SearchBox API key and your search index's name.
 
