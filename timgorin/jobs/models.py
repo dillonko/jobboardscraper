@@ -33,3 +33,6 @@ class Job(models.Model):
 
     def get_absolute_url(self):
         return reverse('jobs.views.job_detail', args=[str(self.pk)])
+
+    def get_updated_field(self):
+        return self.pub_date
