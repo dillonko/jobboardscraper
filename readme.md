@@ -75,8 +75,7 @@ To run the spider to scrape the website:
 
 ```
 workon timgorin
-cd ../scraper/
-scrapy crawl eslcafe
+cd ../scraper/ && scrapy crawl eslcafe
 deactivate
 ```
 
