@@ -79,11 +79,22 @@ WSGI_APPLICATION = 'timgorin.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:////{0}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
+# Parse database configuration from $DATABASE_URL
+DATABASES['default'] = dj_database_url.config(
+    default='sqlite:///{}'.format(DATABASES['default']['NAME'])
+)
+
+# Enable Connection Pooling for PostgreSQL (if desired)
+if DATABASES['default']['ENGINE'] == 'django.db.backends.postgresql_psycopg2':
+    DATABASES['default']['ENGINE'] = 'django_postgrespool'
 
 
 # Internationalization
