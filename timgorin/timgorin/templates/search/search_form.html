@@ -7,7 +7,7 @@
             {{ field }}
         {% else %}
             {{ field.errors }}
-            <p><span class="sr-only">{{ field.label_tag }}</span></p>
+            <p><span class="hidden">{{ field.label_tag }}</span></p>
             <p>{{ field }}</p>
             {% if field.help_text %}
                 <p>{{ field.help_text }}</p>
