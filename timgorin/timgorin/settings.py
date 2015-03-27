@@ -101,7 +101,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(REPOSITORY_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 
@@ -140,7 +140,7 @@ INTERNAL_IPS = (
 
 PAGINATE_BY = 25
 
-GEOIP_DATABASE = os.path.join(BASE_DIR, 'GeoLiteCity.dat')
+GEOIP_DATABASE = os.path.join(SETTINGS_DIR, 'GeoLiteCity.dat')
 
 
 # Haystack
