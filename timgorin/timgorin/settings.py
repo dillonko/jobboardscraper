@@ -9,14 +9,15 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 import os
-import dj_database_url
 
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+################################
+### HEROKU-SPECIFIC SETTINGS ###
+################################
 
+SETTINGS_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.join(SETTINGS_DIR, os.pardir)
+REPOSITORY_DIR = os.path.join(BASE_DIR, os.pardir)
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Website settings
 
@@ -26,20 +27,10 @@ DEBUG = os.environ.get('DEBUG', True)
 
 TEMPLATE_DEBUG = DEBUG
 
-
-# Other settings
-
-SITE_ID = 1
-
-PAGINATE_BY = 25
-
-REMOVE_WWW = True
-
-GEOIP_DATABASE = os.path.join(PROJECT_DIR, 'GeoLiteCity.dat')
-
-INTERNAL_IPS = (
+ALLOWED_HOSTS = [
     '127.0.0.1',
-)
+    'localhost'
+]
 
 
 # Application definition
@@ -67,9 +58,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'easy_timezones.middleware.EasyTimezoneMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'timgorin.urls'
@@ -87,73 +78,69 @@ DATABASES = {
     }
 }
 
-# Parse database configuration from $DATABASE_URL
-DATABASES['default'] = dj_database_url.config(
-    default='sqlite:///{}'.format(DATABASES['default']['NAME'])
-)
-
-# Enable Connection Pooling for PostgreSQL (if desired)
-if DATABASES['default']['ENGINE'] == 'django.db.backends.postgresql_psycopg2':
-    DATABASES['default']['ENGINE'] = 'django_postgrespool'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+
 TIME_ZONE = 'UTC'
+
 USE_I18N = True
+
 USE_L10N = True
+
 USE_TZ = True
-
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Allow all host headers
-ALLOWED_HOSTS = ['*']
-
-# Other security
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_ROOT = 'staticfiles'
+# STATIC_ROOT = os.path.join(REPOSITORY_DIR, 'assets', 'static')
+
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_DIR, 'static'),
-)
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    os.path.join(REPOSITORY_DIR, 'static'),
 )
 
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# Media
+# https://docs.djangoproject.com/en/1.7/topics/files/
+
+MEDIA_ROOT = os.path.join(REPOSITORY_DIR, 'assets', 'media')
+
+MEDIA_URL = '/media/'
 
 
 # Templates
 # https://docs.djangoproject.com/en/1.7/ref/templates/
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'templates'),
 )
+
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+
 TEMPLATE_CONTEXT_PROCESSORS += (
     'timgorin.context_processors.site',
     'timgorin.context_processors.search_form',
 )
 
 
-# Media
+# Other settings
 
-MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
-MEDIA_URL = '/media/'
+SITE_ID = 1
+
+REMOVE_WWW = True
+
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
+
+PAGINATE_BY = 25
+
+GEOIP_DATABASE = os.path.join(BASE_DIR, 'GeoLiteCity.dat')
 
 
 # Haystack
@@ -174,3 +161,37 @@ HAYSTACK_CONNECTIONS = {
 
 if es.username:
     HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
+
+
+################################
+### HEROKU-SPECIFIC SETTINGS ###
+################################
+
+# https://devcenter.heroku.com/articles/getting-started-with-django
+
+ALLOWED_HOSTS += [
+    '.herokuapp.com'
+]
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(
+    default='sqlite:///{}'.format(DATABASES['default']['NAME'])
+)
+
+# Enable Connection Pooling for PostgreSQL (if desired)
+if DATABASES['default']['ENGINE'] == 'django.db.backends.postgresql_psycopg2':
+    DATABASES['default']['ENGINE'] = 'django_postgrespool'
+
+# Static asset configuration
+STATIC_ROOT = 'staticfiles'
+
+# Simplified static file serving.
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+# Other security
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
