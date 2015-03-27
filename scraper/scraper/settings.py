@@ -29,5 +29,8 @@ import django
 django.setup()
 
 # Set Django settings module
+import sys
+sys.path.append('/app/timgorin')
+
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'timgorin.settings'
