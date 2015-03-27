@@ -20,11 +20,6 @@ ITEM_PIPELINES = {
     'scraper.pipelines.EslCafePipeline': 300,
 }
 
-
-# Set Django settings module
-import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'timgorin.settings'
-
 # Although not documented anywhere, I *think* Scrapy falls under the
 # use case of `AppRegistryNotReady` error "if you forget to call
 # django.setup() in a standalone Python script."
@@ -32,3 +27,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'timgorin.settings'
 
 import django
 django.setup()
+
+# Set Django settings module
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'timgorin.settings'
