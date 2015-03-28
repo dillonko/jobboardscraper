@@ -1,11 +1,3 @@
-# Although not documented anywhere, I *think* Scrapy falls under the
-# use case of `AppRegistryNotReady` error "if you forget to call
-# django.setup() in a standalone Python script."
-# https://docs.djangoproject.com/en/1.7/ref/applications/#troubleshooting
-
-import django
-django.setup()
-
 from django.utils import timezone
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors import LinkExtractor
