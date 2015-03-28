@@ -19,3 +19,8 @@ NEWSPIDER_MODULE = 'scraper.spiders'
 ITEM_PIPELINES = {
     'scraper.pipelines.EslCafePipeline': 300,
 }
+
+# Set Django settings module
+
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'timgorin.settings'
