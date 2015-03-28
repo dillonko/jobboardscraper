@@ -5,14 +5,6 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-# Although not documented anywhere, I *think* Scrapy falls under the
-# use case of `AppRegistryNotReady` error "if you forget to call
-# django.setup() in a standalone Python script."
-# https://docs.djangoproject.com/en/1.7/ref/applications/#troubleshooting
-
-import django
-django.setup()
-
 import re
 import pytz
 from datetime import datetime
