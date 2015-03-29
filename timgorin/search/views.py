@@ -16,7 +16,6 @@ class MySearchView(SearchView):
             'query': self.query,
             'search_form': self.form,
             'page': page,
-            'page_obj': page,
             'paginator': paginator,
             'suggestion': None,
         }
