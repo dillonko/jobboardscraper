@@ -2,18 +2,11 @@
 
 This code scrapes a job board with [Scrapy](http://scrapy.org/) every day and integrates it into a [Django](https://www.djangoproject.com/) website with an [Elasticsearch](http://www.elasticsearch.org/) search index and a [PostgreSQL](http://www.postgresql.org/) database. The website is hosted on [Heroku](https://www.heroku.com/).
 
-The deployed website: [http://timgorin.herokuapp.com](http://timgorin.herokuapp.com/)
+The deployed website: [https://timgorin.herokuapp.com](https://timgorin.herokuapp.com/)
 
 ## Installation
 
-Prerequisites:
-
-- [Python](https://www.python.org/)
-- [SQLite](http://www.sqlite.org/)
-- [pip](https://pip.pypa.io/)
-- [virtualenv](http://virtualenv.readthedocs.org/)
-- [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/)
-- [Git](http://git-scm.com/)
+Prerequisites: [Python](https://www.python.org/), [SQLite](https://www.sqlite.org/), [pip](https://pip.pypa.io/), [virtualenv](https://virtualenv.readthedocs.org/), [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/), [Git](http://git-scm.com/).
 
 Your `~/.bash_profile`:
 
@@ -39,10 +32,9 @@ git clone git@github.com:richardcornish/timgorin.git
 mkvirtualenv timgorin
 cd timgorin/
 pip install -r requirements.txt
-add2virtualenv timgorin/
 cd timgorin/
 python manage.py migrate
-python manage.py loaddata fixtures/*
+python manage.py loaddata timgorin/fixtures/*
 python manage.py createsuperuser
 python manage.py runserver
 ```
@@ -55,28 +47,12 @@ Setting a virtualenv default directory is usually a good idea:
 setvirtualenvproject $WORKON_HOME/timgorin/ ~/Sites/timgorin/timgorin/
 ```
 
-Start to work again:
-
-```
-workon timgorin
-deactivate
-```
-
-Future database changes:
-
-```
-python manage.py makemigrations
-python manage.py migrate
-```
-
 ## Scrape
 
 To run the spider to scrape the website:
 
 ```
-workon timgorin
-cd ../scraper/ && scrapy crawl eslcafe
-deactivate
+scrapy crawl eslcafe
 ```
 
 ## Search
@@ -90,9 +66,7 @@ Elasticsearch (and thus Java) is required to update the search index. Assuming [
 
 ## Deployment
 
-The code is set up to deploy to [Heroku](https://www.heroku.com/).
-
-Heroku add-ons I installed:
+The code is set up to deploy to [Heroku](https://www.heroku.com/). Heroku add-ons I installed:
 
 - [Heroku Postgres](https://addons.heroku.com/heroku-postgresql)
 - [Heroku PG Backups](https://addons.heroku.com/pgbackups)
@@ -120,28 +94,25 @@ heroku open
 
 Future deploys:
 
-Commit your files with Git.
-
 ```
 git push heroku master
-heroku run python timgorin/manage.py migrate
 ```
 
 After installation you can then run the commands straight to Heroku:
 
 ```
-heroku run '(cd scraper/ && scrapy crawl eslcafe)'
+heroku run '(cd timgorin/scraper/ && scrapy crawl eslcafe)'
 heroku run python timgorin/manage.py rebuild_index
 ```
 
-Consult Heroku's "[Getting started with Django on Heroku](https://devcenter.heroku.com/articles/getting-started-with-django)" article on production installation.
-
-You will more likely want to run the Scheduler, which needs to run these tasks every day to scrape the website and update the search index:
+But you will more likely want to run the [Scheduler](https://scheduler.heroku.com/dashboard), which needs to run these tasks every day to scrape the website and update the search index:
 
 - `(cd scraper/ && scrapy crawl eslcafe)`
 - `python timgorin/manage.py update_index`
 
 You might need to edit the [SearchBox settings](https://dashboard.searchly.com/6886/indices) on your Heroku dashboard to manually register your SearchBox API key and your search index's name.
+
+Consult Heroku's "[Getting started with Django on Heroku](https://devcenter.heroku.com/articles/getting-started-with-django)" article on production installation.
 
 ## Resources
 
