@@ -55,23 +55,7 @@
     </div>
     {% endfor %}
 
-    {% if page.has_previous or page.has_next %}
-    <div class="text-center">
-        <nav>
-            <ul class="pagination">
-                {% if page.has_previous %}
-                <li><a href="?q={{ query|urlencode }}&amp;page={{ page.previous_page_number }}">&laquo;</a></li>
-                {% endif %}
-                {% for number in paginator.page_range %}
-                <li{% if page.number == number %} class="active"{% endif %}><a href="?q={{ query|urlencode }}&amp;page={{ number }}">{{ number }}</a></li>
-                {% endfor %}
-                {% if page.has_next %}
-                <li><a href="?q={{ query|urlencode }}&amp;page={{ page.next_page_number }}">&raquo;</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
-    {% endif %}
+    {% include 'includes/_pagination.html' with page_obj='page' %}
 
 {% endif %}
 

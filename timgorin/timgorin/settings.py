@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'debug_toolbar',
     'easy_timezones',
+    'pure_pagination',
     'haystack',
     'jobs',
     'organizations',
@@ -142,6 +143,14 @@ INTERNAL_IPS = (
 PAGINATE_BY = 25
 
 GEOIP_DATABASE = os.path.join(SETTINGS_DIR, 'GeoLiteCity.dat')
+
+
+# Pagination
+
+PAGINATION_SETTINGS = {
+    'PAGE_RANGE_DISPLAYED': 2,
+    'MARGIN_PAGES_DISPLAYED': 1,
+}
 
 
 # Haystack
