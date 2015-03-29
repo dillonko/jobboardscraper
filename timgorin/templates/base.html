@@ -5,9 +5,9 @@
 <html lang="{% get_current_language as language %}{{ language }}" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}{{ site.name }}{% endblock %}</title>
+    <title>{% block title %}{{ request.site.name }}{% endblock %}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="apple-mobile-web-app-title" content="{{ site.name }}">
+    <meta name="apple-mobile-web-app-title" content="{{ request.site.name }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -24,7 +24,7 @@
                 <span class="icon-bar"></span>
             </button>
             <header class="site-header">
-                <a href="{% url 'home' %}" class="navbar-brand">{{ site.name }}</a>
+                <a href="{% url 'home' %}" class="navbar-brand">{{ request.site.name }}</a>
             </header>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -58,7 +58,7 @@
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <footer class="site-footer">
-                <p class="text-center"><small>&copy; {% now "Y" %}. <a href="{% url 'home' %}">{{ site.name }}</a>.</small></p>
+                <p class="text-center"><small>&copy; {% now "Y" %}. <a href="{% url 'home' %}">{{ request.site.name }}</a>.</small></p>
             </footer>
         </div>
     </div>

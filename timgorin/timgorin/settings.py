@@ -124,7 +124,7 @@ TEMPLATE_DIRS = (
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 TEMPLATE_CONTEXT_PROCESSORS += (
-    'timgorin.context_processors.site',
+    'django.core.context_processors.request',
     'timgorin.context_processors.search_form',
 )
 
