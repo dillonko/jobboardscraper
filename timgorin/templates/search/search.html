@@ -48,14 +48,16 @@
         <p>No results found.</p>
     {% endif %}
 
-    {% for result in page.object_list %}
-    <div class="result">
-        <p><a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a></p>
-        <p>{% highlight result.object.body with query %}</p>
-    </div>
-    {% endfor %}
+    {% if page.object_list %}
+        {% for result in page.object_list %}
+        <div class="result">
+            <p><a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a></p>
+            <p>{% highlight result.object.body with query %}</p>
+        </div>
+        {% endfor %}
+    {% endif %}
 
-    {% include 'includes/_pagination.html' %}
+    {% include 'includes/_pagination.html' with page_obj='page' %}
 
 {% endif %}
 
