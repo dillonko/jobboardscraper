@@ -1,10 +1,10 @@
 # Job board scraper
 
-This code scrapes a job board with [Scrapy](http://scrapy.org/) every day and integrates it into a [Django](https://www.djangoproject.com/) website with an [Elasticsearch](http://www.elasticsearch.org/) search index and a [PostgreSQL](http://www.postgresql.org/) database. The website is hosted on [Heroku](https://www.heroku.com/).
+This code scrapes a [job board](http://www.eslcafe.com/jobs/korea/) with [Scrapy](http://scrapy.org/) every day and integrates it into a [Django](https://www.djangoproject.com/) website with an [Elasticsearch](http://www.elasticsearch.org/) search index and a [PostgreSQL](http://www.postgresql.org/) database. The website is hosted on [Heroku](https://www.heroku.com/).
 
-The deployed website: [https://timgorin.herokuapp.com](https://timgorin.herokuapp.com/)
+[https://timgorin.herokuapp.com](https://timgorin.herokuapp.com/)
 
-## Installation
+## Install
 
 Prerequisites: [Python](https://www.python.org/), [SQLite](https://www.sqlite.org/), [pip](https://pip.pypa.io/), [virtualenv](https://virtualenv.readthedocs.org/), [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/), [Git](http://git-scm.com/).
 
@@ -58,14 +58,15 @@ scrapy crawl eslcafe
 
 ## Search
 
-Elasticsearch (and thus Java) is required to update the search index. Assuming [Homebrew](http://brew.sh/) is installed:
+Elasticsearch is required to update the search index. Assuming [Homebrew](http://brew.sh/) is installed:
 
-1. Install [Java JDK and Java JRE](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-2. `brew install elasticsearch`
-3. `elasticsearch --config=/usr/local/opt/elasticsearch/config/elasticsearch.yml`
-4. `python manage.py rebuild_index` (or `python manage.py update_index` subsequent times).
+1. `brew install caskroom/cask/brew-cask`
+2. `brew install Caskroom/cask/java`
+3. `brew install elasticsearch`
+4. `elasticsearch --config=/usr/local/opt/elasticsearch/config/elasticsearch.yml`
+5. `python manage.py rebuild_index` (or `python manage.py update_index` subsequent times).
 
-## Deployment
+## Deploy
 
 The code is set up to deploy to [Heroku](https://www.heroku.com/), and as such requires the Heroku Toolbelt:
 
