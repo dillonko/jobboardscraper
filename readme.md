@@ -52,6 +52,7 @@ setvirtualenvproject $WORKON_HOME/timgorin/ ~/Sites/timgorin/timgorin/
 To run the spider to scrape the website:
 
 ```
+cd scraper/
 scrapy crawl eslcafe
 ```
 
@@ -66,7 +67,11 @@ Elasticsearch (and thus Java) is required to update the search index. Assuming [
 
 ## Deployment
 
-The code is set up to deploy to [Heroku](https://www.heroku.com/). Heroku add-ons I installed:
+The code is set up to deploy to [Heroku](https://www.heroku.com/), and as such requires the Heroku Toolbelt:
+
+- [Heroku Toolbelt](https://toolbelt.heroku.com/)
+
+Heroku add-ons I installed:
 
 - [Heroku Postgres](https://addons.heroku.com/heroku-postgresql)
 - [Heroku PG Backups](https://addons.heroku.com/pgbackups)
@@ -76,9 +81,9 @@ The code is set up to deploy to [Heroku](https://www.heroku.com/). Heroku add-on
 Heroku requires some [environment variables](https://devcenter.heroku.com/articles/config-vars):
 
 ```
+heroku login
 heroku create
 heroku config:set TIMGORIN_SECRET_KEY='...'
-heroku config:set DJANGO_SETTINGS_MODULE='timgorin.settings'
 heroku config:set DEBUG=''
 heroku config:set WEB_CONCURRENCY='2'
 heroku addons:add heroku-postgresql
@@ -105,14 +110,12 @@ heroku run '(cd timgorin/scraper/ && scrapy crawl eslcafe)'
 heroku run python timgorin/manage.py rebuild_index
 ```
 
-But you will more likely want to run the [Scheduler](https://scheduler.heroku.com/dashboard), which needs to run these tasks every day to scrape the website and update the search index:
+But you will more likely want to run the [Scheduler](https://scheduler.heroku.com/dashboard), which runs these tasks every day to scrape the website and update the search index:
 
 - `(cd scraper/ && scrapy crawl eslcafe)`
 - `python timgorin/manage.py update_index`
 
 You might need to edit the [SearchBox settings](https://dashboard.searchly.com/6886/indices) on your Heroku dashboard to manually register your SearchBox API key and your search index's name.
-
-Consult Heroku's "[Getting started with Django on Heroku](https://devcenter.heroku.com/articles/getting-started-with-django)" article on production installation.
 
 ## Resources
 
@@ -122,3 +125,4 @@ Resources that helped me:
 - [Python, Web scraping and content management: Scrapy and Django](http://www.slideshare.net/sammyfung/python-web-scraping-and-content-management-scrapy-and-django)
 - [Open Data, Open Government](http://www.slideshare.net/sammyfung/hk0weather-barcamp)
 - New Coder "[Web scraper](http://newcoder.io/scrape/)" tutorial by [Lynn Root](http://www.roguelynn.com/)
+- [Getting started with Django on Heroku](https://devcenter.heroku.com/articles/getting-started-with-django) by Heroku
