@@ -9,7 +9,7 @@ class MySearchForm(SearchForm):
         'autocapitalize': 'words',
         'autocorrect': 'off',
         'placeholder': 'Search jobs',
-        'class': 'form-control',
+        'class': 'form-control input-lg',
     }))
 
     def search(self):

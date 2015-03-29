@@ -9,7 +9,7 @@
     {% endfor %}
 
     <div class="input-group">
-        {{ search_form.q }}
+        <input autocapitalize="words" autocorrect="off" class="form-control" id="id_q" name="q" placeholder="Search jobs" type="search" />
         <span class="input-group-btn">
             <button type="submit" data-submit="Searching" class="btn btn-default">Search</button>
         </span>
