@@ -19,3 +19,6 @@ NEWSPIDER_MODULE = 'scraper.spiders'
 ITEM_PIPELINES = {
     'scraper.pipelines.EslCafePipeline': 300,
 }
+
+import django
+django.setup()
