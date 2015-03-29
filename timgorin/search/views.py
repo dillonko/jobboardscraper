@@ -10,12 +10,12 @@ class MySearchView(SearchView):
         Copied from django-haystack to simply customize the `search_form` context variable
         https://github.com/toastdriven/django-haystack/blob/master/haystack/views.py#L126
         """
-        (paginator, page) = self.build_page()
+        (paginator, page_obj) = self.build_page()
 
         context = {
             'query': self.query,
             'search_form': self.form,
-            'page': page,
+            'page_obj': page_obj,
             'paginator': paginator,
             'suggestion': None,
         }
