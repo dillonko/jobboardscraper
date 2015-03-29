@@ -20,7 +20,9 @@ ITEM_PIPELINES = {
     'scraper.pipelines.EslCafePipeline': 300,
 }
 
-# Set Django settings module
+
+# Django Item requires explicit Django settings in Scrapy settings
+# http://doc.scrapy.org/en/latest/topics/djangoitem.html
 
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'timgorin.settings'
