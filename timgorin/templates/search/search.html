@@ -55,7 +55,7 @@
     </div>
     {% endfor %}
 
-    {% if is_paginated %}
+    {% if page.has_previous or page.has_next %}
     <div class="text-center">
         <nav>
             <ul class="pagination">
