@@ -14,13 +14,37 @@
 
 <h1>Search</h1>
 
-{% include 'search/search_form.html' %}
+<div class="row">
+    <div class="col-lg-12">
+
+        {{ search_form.non_field_errors }}
+
+        <form method="get" action="{% url 'search' %}">
+
+            {% for field in search_form %}
+                {% if field.is_hidden %}
+                {{ field }}
+                {% endif %}
+            {% endfor %}
+
+            <div class="input-group">
+                <input autocapitalize="words" autocorrect="off" class="form-control input-lg" id="id_q" name="q" placeholder="Search jobs" type="search" />
+                <span class="input-group-btn">
+                    <button type="submit" data-submit="Searching" class="btn btn-lg btn-primary">Search</button>
+                </span>
+            </div>
+
+        </form>
+
+    </div>
+</div>
 
 {% if query %}
 
     {% if page.object_list %}
         <h2>Results {{ page.start_index }}&#8211;{{ page.end_index }} of {{ page.paginator.count|intcomma }}</h2>
     {% else %}
+        <h2></h2>
         <p>No results found.</p>
     {% endif %}
 
@@ -31,20 +55,21 @@
     </div>
     {% endfor %}
 
-    {% if page.has_previous or page.has_next %}
-    <div class="pagination">
-        <ul>
-            {% if page.has_previous %}
-            <li class="pagination-newer">
-                <a href="?q={{ query|urlencode }}&amp;page={{ page.previous_page_number }}"><span class="arrow">&larr;</span> Previous</a>
-            </li>
-            {% endif %}
-            {% if page.has_next %}
-            <li class="pagination-older">
-                <a href="?q={{ query|urlencode }}&amp;page={{ page.next_page_number }}">Next <span class="arrow">&rarr;</span></a>
-            </li>
-            {% endif %}
-        </ul>
+    {% if is_paginated %}
+    <div class="text-center">
+        <nav>
+            <ul class="pagination">
+                {% if page.has_previous %}
+                <li><a href="?q={{ query|urlencode }}&amp;page={{ page.previous_page_number }}">&laquo;</a></li>
+                {% endif %}
+                {% for number in paginator.page_range %}
+                <li{% if page.number == number %} class="active"{% endif %}><a href="?q={{ query|urlencode }}&amp;page={{ number }}">{{ number }}</a></li>
+                {% endfor %}
+                {% if page.has_next %}
+                <li><a href="?q={{ query|urlencode }}&amp;page={{ page.next_page_number }}">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
     {% endif %}
 

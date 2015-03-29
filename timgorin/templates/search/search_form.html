@@ -1,20 +1,18 @@
 {{ search_form.non_field_errors }}
 
-<form method="get" action="{% url 'search' %}">
+<form method="get" action="{% url 'search' %}" class="navbar-form navbar-right">
 
     {% for field in search_form %}
         {% if field.is_hidden %}
-            {{ field }}
-        {% else %}
-            {{ field.errors }}
-            <p><span class="hidden">{{ field.label_tag }}</span></p>
-            <p>{{ field }}</p>
-            {% if field.help_text %}
-                <p>{{ field.help_text }}</p>
-            {% endif %}
+        {{ field }}
         {% endif %}
     {% endfor %}
 
-    <p><button type="submit">Search</button></p>
+    <div class="input-group">
+        {{ search_form.q }}
+        <span class="input-group-btn">
+            <button type="submit" data-submit="Searching" class="btn btn-default">Search</button>
+        </span>
+    </div>
 
 </form>

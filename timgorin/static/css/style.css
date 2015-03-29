@@ -1,0 +1,9 @@
+.highlighted {
+    background-color: #ffeb6b;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.site-footer {
+    margin: 3rem 0;
+}

@@ -1,16 +1,17 @@
 {% if is_paginated %}
-<div class="pagination">
-    <ul>
-        {% if page_obj.has_previous %}
-        <li class="pagination-newer">
-            <a href="?page={{ page_obj.previous_page_number }}"><span class="arrow">&larr;</span> Newer</a>
-        </li>
-        {% endif %}
-        {% if page_obj.has_next %}
-        <li class="pagination-older">
-            <a href="?page={{ page_obj.next_page_number }}">Older <span class="arrow">&rarr;</span></a>
-        </li>
-        {% endif %}
-    </ul>
+<div class="text-center">
+    <nav>
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% endif %}
+            {% for number in paginator.page_range %}
+            <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
 </div>
 {% endif %}

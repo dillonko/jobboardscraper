@@ -6,6 +6,9 @@
 {% block title %}{{ job.title }} &#183; {{ block.super }}{% endblock %}
 
 
+{% block jobs_active %}active{% endblock %}
+
+
 {% block content %}
 
 <h1>{{ job.title }}</h1>
@@ -25,7 +28,6 @@
 {% endif %}
 
 <h2>Source</h2>
-<p><a href="{{ job.board.url }}">{{ job.board.title }}</a></p>
-<p><a href="{{ job.url }}" rel="external">{{ job.url }}</a></p>
+<p><a href="{{ job.url }}" rel="external">{{ job.board.title }}</a></p>
 
 {% endblock %}
