@@ -1,4 +1,4 @@
-{% if is_paginated or page_obj.object_list %}
+{% if is_paginated %}
 <div class="text-center">
     <nav>
         <ul class="pagination">
@@ -18,6 +18,35 @@
             {% endfor %}
             {% if page_obj.has_next %}
             <li><a href="?{{ page_obj.next_page_number.querystring }}">&raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endif %}
+
+
+{# Haystack has its own way of pagination, so we kind of repeat it here :-/ #}
+
+{% if page.object_list %}
+<div class="text-center">
+    <nav>
+        <ul class="pagination">
+            {% if page.has_previous %}
+            <li><a href="?q={{ query|urlencode }}&amp;page={{ page.previous_page_number }}">&laquo;</a></li>
+            {% endif %}
+            {% for number in paginator.page_range %}
+                {% if number %}
+                    {% ifequal page.number number %}
+                        <li class="active"><span>{{ number }}</span></li>
+                    {% else %}
+                        <li><a href="?q={{ query|urlencode }}&amp;page={{ number }}">{{ number }}</a></li>
+                    {% endifequal %}
+                {% else %}
+                    <li><span>...</span></li>
+                {% endif %}
+            {% endfor %}
+            {% if page.has_next %}
+            <li><a href="?q={{ query|urlencode }}&amp;page={{ page.next_page_number }}">&raquo;</a></li>
             {% endif %}
         </ul>
     </nav>

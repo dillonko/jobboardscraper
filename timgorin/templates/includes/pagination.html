@@ -6,7 +6,7 @@
             <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
             {% endif %}
             {% for number in paginator.page_range %}
-            <li{% if page_obj.number == number %} class="active"{% endif %}><a href="?page={{ number }}">{{ number }}</a></li>
+            <li{% ifequal page_obj.number number %} class="active"{% endifequal %}><a href="?page={{ number }}">{{ number }}</a></li>
             {% endfor %}
             {% if page_obj.has_next %}
             <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
