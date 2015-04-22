@@ -38,7 +38,25 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             {% block search %}
-                            {% include 'search/search_form.html' %}
+
+                            {{ search_form.non_field_errors }}
+
+                            <form method="get" action="{% url 'search' %}" class="navbar-form navbar-right">
+
+                                {% for field in search_form %}
+                                    {% if field.is_hidden %}
+                                    {{ field }}
+                                    {% endif %}
+                                {% endfor %}
+
+                                <div class="input-group">
+                                    {{ search_form.q }}
+                                    <span class="input-group-btn">
+                                        <button type="submit" data-submit="Searching" class="btn btn-default">Search</button>
+                                    </span>
+                                </div>
+
+                            </form>
                             {% endblock %}
                         </li>
                     </ul>

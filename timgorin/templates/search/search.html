@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load highlight humanize %}
+{% load widget_tweaks highlight humanize %}
 
 
 {% block title %}Search {% if query %}&#8220;{{ query }}&#8221;{% endif %} &#183; {{ block.super }}{% endblock %}
@@ -28,7 +28,7 @@
             {% endfor %}
 
             <div class="input-group">
-                {{ search_form.q }}
+                {{ search_form.q|add_class:"input-lg" }}
                 <span class="input-group-btn">
                     <button type="submit" data-submit="Searching" class="btn btn-lg btn-primary">Search</button>
                 </span>

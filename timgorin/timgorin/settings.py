@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'easy_timezones',
     'pure_pagination',
+    'widget_tweaks',
     'haystack',
     'jobs',
     'organizations',
