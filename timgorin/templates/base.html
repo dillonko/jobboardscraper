@@ -34,6 +34,7 @@
                     <ul class="nav navbar-nav">
                         <li class="{% block jobs_active %}{% endblock %}"><a href="{% url 'job_list' %}">Jobs</a></li>
                         <li class="{% block organizations_active %}{% endblock %}"><a href="{% url 'organization_list' %}">Organizations</a></li>
+                        <li class="{% block search_active %}{% endblock %}"><a href="{% url 'search' %}">Search</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
