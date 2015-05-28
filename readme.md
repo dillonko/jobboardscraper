@@ -93,7 +93,7 @@ heroku addons:add scheduler
 heroku addons:add searchbox
 git push heroku master
 heroku run python timgorin/manage.py migrate
-heroku run python timgorin/manage.py loaddata timgorin/fixtures/*
+heroku run python timgorin/manage.py loaddata timgorin/timgorin/fixtures/*
 heroku run python timgorin/manage.py createsuperuser
 heroku open
 ```
