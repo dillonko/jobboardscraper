@@ -1,14 +1,10 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import url
 
 from .views import MySearchView
-from .forms import MySearchForm
 
 
-urlpatterns = patterns('search.views',
+urlpatterns = [
 
-    url(r'^$',
-        MySearchView(form_class=MySearchForm),
-        name='search'
-    ),
+    url(r'^$', MySearchView.as_view(), name='search'),
 
-)
+]

@@ -9,8 +9,6 @@ from .models import Job
 class JobDetailView(DetailView):
     model = Job
 
-job_detail = JobDetailView.as_view()
-
 
 class JobListView(PaginationMixin, ListView):
     model = Job
@@ -20,5 +18,3 @@ class JobListView(PaginationMixin, ListView):
         context = super(JobListView, self).get_context_data(**kwargs)
         context['job_count'] = Job.objects.count()
         return context
-
-job_list = JobListView.as_view()

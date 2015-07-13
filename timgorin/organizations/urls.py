@@ -1,16 +1,12 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import url
+
+from .views import OrganizationDetailView, OrganizationListView
 
 
-urlpatterns = patterns('organizations.views',
+urlpatterns = [
 
-    url(r'^(?P<slug>[-\w]+)/$',
-        view='organization_detail',
-        name='organization_detail'
-    ),
+    url(r'^(?P<slug>[-\w]+)/$', OrganizationDetailView.as_view(), name='organization_detail'),
 
-    url(r'^$',
-        view='organization_list',
-        name='organization_list'
-    ),
+    url(r'^$', OrganizationListView.as_view(), name='organization_list'),
 
-)
+]

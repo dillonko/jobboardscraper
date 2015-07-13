@@ -18,6 +18,4 @@ class MySearchForm(SearchForm):
         if not self.is_valid():
             return self.no_query_found()
 
-        sqs = sqs.order_by('-pub_date')
-
         return sqs

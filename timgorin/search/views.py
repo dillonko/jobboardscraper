@@ -1,27 +1,12 @@
-from django.shortcuts import render_to_response
+from haystack.generic_views import SearchView
 
-from haystack.views import SearchView
+from .forms import MySearchForm
 
 
 class MySearchView(SearchView):
+    form_class = MySearchForm
 
-    def create_response(self):
-        """
-        Copied from django-haystack to simply customize the `search_form` context variable
-        https://github.com/toastdriven/django-haystack/blob/master/haystack/views.py#L126
-        """
-        (paginator, page) = self.build_page()
-
-        context = {
-            'query': self.query,
-            'search_form': self.form,
-            'page': page,
-            'paginator': paginator,
-            'suggestion': None,
-        }
-
-        if self.results and hasattr(self.results, 'query') and self.results.query.backend.include_spelling:
-            context['suggestion'] = self.form.get_suggestion()
-
-        context.update(self.extra_context())
-        return render_to_response(self.template, context, context_instance=self.context_class(self.request))
+    def get_context_data(self, *args, **kwargs):
+        context = super(MySearchView, self).get_context_data(*args, **kwargs)
+        context['search_form'] = self.get_form_class()
+        return context

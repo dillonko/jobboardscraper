@@ -1,18 +1,12 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import url
+
+from .views import JobDetailView, JobListView
 
 
-urlpatterns = patterns('jobs.views',
+urlpatterns = [
 
-    # Detail
-    url(r'^(?P<pk>[\d]+)/$',
-        view='job_detail',
-        name='job_detail'
-    ),
+    url(r'^(?P<pk>[\d]+)/$', JobDetailView.as_view(), name='job_detail'),
 
-    # List
-    url(r'^$',
-        view='job_list',
-        name='job_list'
-    ),
+    url(r'^$', JobListView.as_view(), name='job_list'),
 
-)
+]

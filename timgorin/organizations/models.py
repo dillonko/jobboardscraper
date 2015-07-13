@@ -8,10 +8,10 @@ class Organization(models.Model):
     email = models.EmailField(blank=True)
 
     class Meta:
-        ordering = ['title']
+        ordering = ["title"]
 
     def __unicode__(self):
-        return u'%s' % self.title
+        return u"%s" % self.title
 
     def get_absolute_url(self):
-        return reverse('organizations.views.organization_detail', args=[str(self.slug)])
+        return reverse("organization_detail", args=[str(self.slug)])
