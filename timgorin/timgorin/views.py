@@ -17,5 +17,6 @@ robots = RobotsTemplateView.as_view()
 
 class FaviconRedirectView(RedirectView):
     url = '%simg/favicon.ico' % settings.STATIC_URL
+    permanent = True
 
 favicon = FaviconRedirectView.as_view()
