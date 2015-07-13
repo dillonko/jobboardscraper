@@ -44,15 +44,15 @@
 
 {% if query %}
 
-    {% if page_object.object_list %}
-        <h2>Results {{ page_object.start_index }}&#8211;{{ page_object.end_index }} of {{ page_object.paginator.count|intcomma }}</h2>
+    {% if page.object_list %}
+        <h2>Results {{ page.start_index }}&#8211;{{ page.end_index }} of {{ page.paginator.count|intcomma }}</h2>
     {% else %}
         <h2></h2>
         <p>No results found.</p>
     {% endif %}
 
-    {% if page_object.object_list %}
-        {% for result in page_object.object_list %}
+    {% if page.object_list %}
+        {% for result in page.object_list %}
         <div class="result">
             <p><a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a></p>
             <p>{% highlight result.object.body with query %}</p>
