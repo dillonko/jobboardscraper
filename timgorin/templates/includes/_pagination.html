@@ -31,12 +31,12 @@
 <div class="text-center">
     <nav>
         <ul class="pagination">
-            {% if page.has_previous %}
-            <li><a href="?q={{ query|urlencode }}&amp;page={{ page.previous_page_number }}">&laquo;</a></li>
+            {% if page_obj.has_previous %}
+            <li><a href="?q={{ query|urlencode }}&amp;page={{ page_obj.previous_page_number }}">&laquo;</a></li>
             {% endif %}
             {% for number in paginator.page_range %}
                 {% if number %}
-                    {% ifequal page.number number %}
+                    {% ifequal page_obj.number number %}
                         <li class="active"><span>{{ number }}</span></li>
                     {% else %}
                         <li><a href="?q={{ query|urlencode }}&amp;page={{ number }}">{{ number }}</a></li>
@@ -45,8 +45,8 @@
                     <li><span>...</span></li>
                 {% endif %}
             {% endfor %}
-            {% if page.has_next %}
-            <li><a href="?q={{ query|urlencode }}&amp;page={{ page.next_page_number }}">&raquo;</a></li>
+            {% if page_obj.has_next %}
+            <li><a href="?q={{ query|urlencode }}&amp;page={{ page_obj.next_page_number }}">&raquo;</a></li>
             {% endif %}
         </ul>
     </nav>
