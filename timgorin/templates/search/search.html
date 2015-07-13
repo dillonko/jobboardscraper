@@ -45,7 +45,7 @@
 {% if query %}
 
     {% if object_list %}
-        <h2>Results {{ page.start_index }}&#8211;{{ page.end_index }} of {{ page.paginator.count|intcomma }}</h2>
+        <h2>Results {{ page_obj.start_index }}&#8211;{{ page_obj.end_index }} of {{ page_obj.paginator.count|intcomma }}</h2>
     {% else %}
         <h2></h2>
         <p>No results found.</p>
