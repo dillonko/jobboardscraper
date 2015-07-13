@@ -1,4 +1,4 @@
-import datetime
+from django.utils import timezone
 
 from haystack import indexes
 
@@ -13,7 +13,5 @@ class JobIndex(indexes.SearchIndex, indexes.Indexable):
         return Job
 
     def index_queryset(self, using=None):
-        """
-        Used when the entire index for model is updated.
-        """
-        return self.get_model().objects.filter(pub_date__lte=datetime.datetime.now())
+        """Used when the entire index for model is updated."""
+        return self.get_model().objects.filter(pub_date__lte=timezone.now())
