@@ -23,32 +23,3 @@
     </nav>
 </div>
 {% endif %}
-
-
-{# Haystack has its own way of pagination, so we kind of repeat it here :-/ #}
-
-{% if object_list %}
-<div class="text-center">
-    <nav>
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
-            <li><a href="?q={{ query|urlencode }}&amp;page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-            {% endif %}
-            {% for number in paginator.page_range %}
-                {% if number %}
-                    {% ifequal page_obj.number number %}
-                        <li class="active"><span>{{ number }}</span></li>
-                    {% else %}
-                        <li><a href="?q={{ query|urlencode }}&amp;page={{ number }}">{{ number }}</a></li>
-                    {% endifequal %}
-                {% else %}
-                    <li><span>...</span></li>
-                {% endif %}
-            {% endfor %}
-            {% if page_obj.has_next %}
-            <li><a href="?q={{ query|urlencode }}&amp;page={{ page_obj.next_page_number }}">&raquo;</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-</div>
-{% endif %}

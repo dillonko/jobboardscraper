@@ -149,7 +149,7 @@ INTERNAL_IPS = (
     '127.0.0.1',
 )
 
-PAGINATE_BY = 25
+PAGINATE_BY = 20
 
 GEOIP_DATABASE = os.path.join(SETTINGS_DIR, 'GeoLiteCity.dat')
 
