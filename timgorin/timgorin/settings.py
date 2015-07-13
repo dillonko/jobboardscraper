@@ -2,10 +2,10 @@
 Django settings for timgorin project.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
+https://docs.djangoproject.com/en/1.8/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
+https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 import os
@@ -72,7 +72,7 @@ WSGI_APPLICATION = 'timgorin.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -97,7 +97,7 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 # STATIC_ROOT = os.path.join(REPOSITORY_DIR, 'assets', 'static')
 
@@ -109,7 +109,7 @@ STATICFILES_DIRS = (
 
 
 # Media
-# https://docs.djangoproject.com/en/1.7/topics/files/
+# https://docs.djangoproject.com/en/1.8/topics/files/
 
 MEDIA_ROOT = os.path.join(REPOSITORY_DIR, 'assets', 'media')
 
@@ -117,18 +117,27 @@ MEDIA_URL = '/media/'
 
 
 # Templates
-# https://docs.djangoproject.com/en/1.7/ref/templates/
+# https://docs.djangoproject.com/en/1.8/ref/templates/
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
-
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
-
-TEMPLATE_CONTEXT_PROCESSORS += (
-    'django.core.context_processors.request',
-    'timgorin.context_processors.search_form',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
+                'timgorin.context_processors.search_form',
+            ],
+        },
+    },
+]
 
 
 # Other settings
