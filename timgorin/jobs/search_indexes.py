@@ -17,4 +17,4 @@ class JobIndex(indexes.SearchIndex, indexes.Indexable):
         return self.get_model().objects.filter(pub_date__lte=timezone.now())
 
     def get_updated_field(self):
-        return self.pub_date
+        return 'pub_date'
