@@ -21,9 +21,9 @@ REPOSITORY_DIR = os.path.join(BASE_DIR, os.pardir)
 
 # Website settings
 
-SECRET_KEY = os.environ.get('TIMGORIN_SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'knv3mcls)af%i!m2(8byle2#%=qa6#^)!h=@#nvs)nc*g)a7u4')
 
-DEBUG = os.environ.get('DEBUG', True)
+DEBUG = bool(os.environ.get('DEBUG', True))
 
 TEMPLATE_DEBUG = DEBUG
 
