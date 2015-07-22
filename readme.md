@@ -87,10 +87,10 @@ heroku create
 heroku config:set TIMGORIN_SECRET_KEY='...'
 heroku config:set DEBUG=''
 heroku config:set WEB_CONCURRENCY='2'
-heroku addons:add heroku-postgresql
-heroku addons:add pgbackups
-heroku addons:add scheduler
-heroku addons:add searchbox
+heroku addons:create heroku-postgresql
+heroku addons:create pgbackups
+heroku addons:create scheduler
+heroku addons:create searchbox
 git push heroku master
 heroku run python timgorin/manage.py migrate
 heroku run python timgorin/manage.py loaddata timgorin/timgorin/fixtures/*
