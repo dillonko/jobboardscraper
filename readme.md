@@ -17,12 +17,7 @@ export PATH=/usr/local/bin:$PATH
 # Virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
-
-# Tim Gorin
-export TIMGORIN_SECRET_KEY='...'
 ```
-
-Replace `...` with a [Django Secret Key](http://www.miniwebtool.com/django-secret-key-generator/) and restart Terminal.
 
 Download and install:
 
