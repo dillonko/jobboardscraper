@@ -79,7 +79,7 @@ Heroku requires some [environment variables](https://devcenter.heroku.com/articl
 ```
 heroku login
 heroku create
-heroku config:set TIMGORIN_SECRET_KEY='...'
+heroku config:set SECRET_KEY='...'
 heroku config:set DEBUG=''
 heroku config:set WEB_CONCURRENCY='2'
 heroku addons:create heroku-postgresql
