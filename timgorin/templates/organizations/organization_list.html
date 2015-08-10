@@ -13,7 +13,7 @@
 
 <h1>Organizations</h1>
 
-<p>{{ organization_count|intcomma }} organization{{ organization_count|pluralize }}</p>
+<p>{{ paginator.count|intcomma }} organization{{ paginator.count|pluralize }}</p>
 
 <ul>
     {% for organization in organization_list %}
