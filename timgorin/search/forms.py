@@ -4,12 +4,11 @@ from haystack.forms import SearchForm
 
 
 class MySearchForm(SearchForm):
-    q = forms.CharField(required=False, label='Search', widget=forms.TextInput(attrs={
+    q = forms.CharField(required=False, label='Query', widget=forms.TextInput(attrs={
         'type': 'search',
-        'autocapitalize': 'words',
         'autocorrect': 'off',
-        'placeholder': 'Search jobs',
         'class': 'form-control',
+        'placeholder': 'Search jobs',
     }))
 
     def search(self):
