@@ -20,3 +20,11 @@ class MySearchForm(SearchForm):
         sqs = sqs.order_by('-pub_date')
 
         return sqs
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(MySearchForm, self).__init__(*args, **kwargs)
+        if self.request:
+            if 'q' in self.request.GET:
+                copy = self.request.GET.copy()
+                self.fields['q'].initial = copy['q'].strip()
