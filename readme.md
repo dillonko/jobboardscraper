@@ -70,7 +70,6 @@ The code is set up to deploy to [Heroku](https://www.heroku.com/), and as such r
 Heroku add-ons I installed:
 
 - [Heroku Postgres](https://addons.heroku.com/heroku-postgresql)
-- [Heroku PG Backups](https://addons.heroku.com/pgbackups)
 - [Heroku Scheduler](https://addons.heroku.com/scheduler)
 - [SearchBox Elasticsearch](https://addons.heroku.com/searchbox)
 
@@ -83,7 +82,6 @@ heroku config:set SECRET_KEY='...'
 heroku config:set DEBUG=''
 heroku config:set WEB_CONCURRENCY='2'
 heroku addons:create heroku-postgresql
-heroku addons:create pgbackups
 heroku addons:create scheduler
 heroku addons:create searchbox
 git push heroku master
