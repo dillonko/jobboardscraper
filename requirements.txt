@@ -28,6 +28,7 @@ pyOpenSSL==16.0.0
 pytz==2016.4
 queuelib==1.4.2
 Scrapy==1.0.6
+scrapy-djangoitem==1.1.1
 service-identity==16.0.0
 six==1.10.0
 SQLAlchemy==1.0.12
