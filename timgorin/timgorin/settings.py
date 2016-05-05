@@ -1,36 +1,24 @@
-"""
-Django settings for timgorin project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.8/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.8/ref/settings/
-"""
-
 import os
 
-################################
-### HEROKU-SPECIFIC SETTINGS ###
-################################
-
-SETTINGS_DIR = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR = os.path.join(SETTINGS_DIR, os.pardir)
-REPOSITORY_DIR = os.path.join(BASE_DIR, os.pardir)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
 # Website settings
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'knv3mcls)af%i!m2(8byle2#%=qa6#^)!h=@#nvs)nc*g)a7u4')
 
-DEBUG = bool(os.environ.get('DEBUG', True))
-
-TEMPLATE_DEBUG = DEBUG
+DEBUG = os.environ.get('DEBUG', True)
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'localhost'
+    'localhost',
+    '.herokuapp.com'
 ]
+
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
 
 
 # Application definition
@@ -68,57 +56,6 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'timgorin.urls'
 
-WSGI_APPLICATION = 'timgorin.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
-
-# STATIC_ROOT = os.path.join(REPOSITORY_DIR, 'assets', 'static')
-
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-
-# Media
-# https://docs.djangoproject.com/en/1.8/topics/files/
-
-MEDIA_ROOT = os.path.join(REPOSITORY_DIR, 'assets', 'media')
-
-MEDIA_URL = '/media/'
-
-
-# Templates
-# https://docs.djangoproject.com/en/1.8/ref/templates/
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -138,31 +75,101 @@ TEMPLATES = [
     },
 ]
 
-
-# Other settings
-
-SITE_ID = 1
-
-REMOVE_WWW = True
-
-INTERNAL_IPS = (
-    '127.0.0.1',
-)
-
-PAGINATE_BY = 20
-
-GEOIP_DATABASE = os.path.join(SETTINGS_DIR, 'GeoLiteCity.dat')
+WSGI_APPLICATION = 'timgorin.wsgi.application'
 
 
-# Pagination
+# Database
+# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-PAGINATION_SETTINGS = {
-    'PAGE_RANGE_DISPLAYED': 2,
-    'MARGIN_PAGES_DISPLAYED': 1,
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 
+# Password validation
+# https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+
+# Internationalization
+# https://docs.djangoproject.com/en/1.6/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.abspath(os.path.join(PROJECT_ROOT, os.pardir, 'static')),
+)
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+
+# Media
+# https://docs.djangoproject.com/en/1.9/topics/files/
+
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'assets', 'media')
+
+MEDIA_URL = '/media/'
+
+
+
+# Sites
+# https://docs.djangoproject.com/en/1.9/ref/contrib/sites/
+
+SITE_ID = 1
+
+
+# Heroku
+# https://devcenter.heroku.com/articles/getting-started-with-django
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(
+    default='sqlite:///{}'.format(DATABASES['default']['NAME'])
+)
+
+# Enable Connection Pooling for PostgreSQL (if desired)
+if DATABASES['default']['ENGINE'] == 'django.db.backends.postgresql_psycopg2':
+    DATABASES['default']['ENGINE'] = 'django_postgrespool'
+
+
 # Haystack
+# http://django-haystack.readthedocs.io/en/v2.4.1/
 
 from urlparse import urlparse
 
@@ -182,35 +189,25 @@ if es.username:
     HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
 
 
-################################
-### HEROKU-SPECIFIC SETTINGS ###
-################################
+# django-pure-pagination
+# https://github.com/jamespacileo/django-pure-pagination
 
-# https://devcenter.heroku.com/articles/getting-started-with-django
+PAGINATE_BY = 20
 
-ALLOWED_HOSTS += [
-    '.herokuapp.com'
-]
+PAGINATION_SETTINGS = {
+    'PAGE_RANGE_DISPLAYED': 2,
+    'MARGIN_PAGES_DISPLAYED': 1,
+}
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(
-    default='sqlite:///{}'.format(DATABASES['default']['NAME'])
-)
+# django-easy-timezones
+# https://github.com/Miserlou/django-easy-timezones
 
-# Enable Connection Pooling for PostgreSQL (if desired)
-if DATABASES['default']['ENGINE'] == 'django.db.backends.postgresql_psycopg2':
-    DATABASES['default']['ENGINE'] = 'django_postgrespool'
+GEOIP_DATABASE = os.path.join(PROJECT_ROOT, 'GeoLiteCity.dat')
 
-# Static asset configuration
-STATIC_ROOT = 'staticfiles'
+GEOIPV6_DATABASE = os.path.join(PROJECT_ROOT, 'GeoLiteCityv6.dat')
 
-# Simplified static file serving.
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-# Other security
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# Other settings
+
+REMOVE_WWW = True

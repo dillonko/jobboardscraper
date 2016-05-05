@@ -1,22 +1,17 @@
 from django.conf import settings
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic import TemplateView, RedirectView
 
 
-class HomeTemplateView(TemplateView):
+class HomeView(TemplateView):
     template_name = 'home.html'
 
-home = HomeTemplateView.as_view()
 
-
-class RobotsTemplateView(TemplateView):
-    template_name = 'robots.txt'
-    content_type = 'text/plain'
-
-robots = RobotsTemplateView.as_view()
-
-
-class FaviconRedirectView(RedirectView):
-    url = '%simg/favicon.ico' % settings.STATIC_URL
+class FaviconView(RedirectView):
+    url = staticfiles_storage.url('img/favicon.ico')
     permanent = True
 
-favicon = FaviconRedirectView.as_view()
+
+class RobotsView(TemplateView):
+    template_name = 'robots.txt'
+    content_type = 'text/plain'
