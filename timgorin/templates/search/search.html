@@ -31,7 +31,7 @@
             {% endfor %}
 
             <div class="input-group">
-                {{ search_form.q|add_class:"input-lg" }}
+                {{ search_form.q|attr:"autofocus:autofocus"|add_class:"input-lg" }}
                 <span class="input-group-btn">
                     <button type="submit" data-submit="Searching" class="btn btn-lg btn-primary">Search</button>
                 </span>
