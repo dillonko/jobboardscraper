@@ -36,6 +36,15 @@ class EslCafePipeline(object):
             item.save()
         else:
             raise DropItem('Job already exists.')
+
+        """
+        For every job that we save, we delete the oldest job because Heroku's
+        free hobby-dev plan is limited to 10,000 rows.
+        https://www.heroku.com/pricing
+        """
+        job = Job.objects.all().last()
+        job.delete()
+
         return item
 
     def get_or_create_board(self, title, url):
