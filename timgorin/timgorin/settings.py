@@ -23,7 +23,8 @@ INTERNAL_IPS = (
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
+    # Default
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -32,17 +33,21 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+
+    # Third-party
     'debug_toolbar',
     'easy_timezones',
     'pure_pagination',
     'widget_tweaks',
     'haystack',
+
+    # Project
     'jobs',
     'organizations',
     'search',
-)
+]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -52,7 +57,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'easy_timezones.middleware.EasyTimezoneMiddleware',
-)
+]
 
 ROOT_URLCONF = 'timgorin.urls'
 
@@ -157,15 +162,10 @@ SITE_ID = 1
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Parse database configuration from $DATABASE_URL
+# Update database configuration with $DATABASE_URL.
 import dj_database_url
-DATABASES['default'] = dj_database_url.config(
-    default='sqlite:///{}'.format(DATABASES['default']['NAME'])
-)
-
-# Enable Connection Pooling for PostgreSQL (if desired)
-if DATABASES['default']['ENGINE'] == 'django.db.backends.postgresql_psycopg2':
-    DATABASES['default']['ENGINE'] = 'django_postgrespool'
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 
 # Haystack

@@ -8,8 +8,7 @@ dj-static==0.0.6
 Django==1.9.6
 django-debug-toolbar==1.4
 django-easy-timezones==0.7.0
-git+git://github.com/django-haystack/django-haystack.git
-django-postgrespool==0.3.0
+django-haystack==2.5.dev0
 django-pure-pagination==0.3.0
 django-toolbelt==0.0.1
 django-widget-tweaks==1.4.1
@@ -31,7 +30,6 @@ Scrapy==1.0.6
 scrapy-djangoitem==1.1.1
 service-identity==16.0.0
 six==1.10.0
-SQLAlchemy==1.0.12
 sqlparse==0.1.19
 static3==0.6.1
 Twisted==16.1.1
