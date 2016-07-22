@@ -42,8 +42,8 @@ class EslCafePipeline(object):
         free hobby-dev plan is limited to 10,000 rows.
         https://www.heroku.com/pricing
         """
-        job = Job.objects.all().last()
-        job.delete()
+        # job = Job.objects.all().last()
+        # job.delete()
 
         return item
 
