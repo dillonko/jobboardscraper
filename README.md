@@ -24,7 +24,7 @@ Download and install:
 ```
 mkdir -p ~/Sites/ && cd ~/Sites/
 git clone git@github.com:richardcornish/timgorin.git
-mkvirtualenv timgorin
+mkvirtualenv timgorin -p /usr/local/bin/python3
 cd timgorin/
 pip install -r requirements.txt
 cd timgorin/

@@ -48,6 +48,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,7 +86,7 @@ WSGI_APPLICATION = 'timgorin.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -95,7 +97,7 @@ DATABASES = {
 
 
 # Password validation
-# https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -128,7 +130,7 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
+# https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
@@ -138,20 +140,19 @@ STATICFILES_DIRS = (
     os.path.abspath(os.path.join(PROJECT_ROOT, os.pardir, 'static')),
 )
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Media
-# https://docs.djangoproject.com/en/1.9/topics/files/
+# https://docs.djangoproject.com/en/1.10/topics/files/
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'assets', 'media')
 
 MEDIA_URL = '/media/'
 
 
-
 # Sites
-# https://docs.djangoproject.com/en/1.9/ref/contrib/sites/
+# https://docs.djangoproject.com/en/1.10/ref/contrib/sites/
 
 SITE_ID = 1
 
@@ -169,9 +170,10 @@ DATABASES['default'].update(db_from_env)
 
 
 # Haystack
-# http://django-haystack.readthedocs.io/en/v2.4.1/
+# http://django-haystack.readthedocs.io/en/v2.5.0/
+# https://devcenter.heroku.com/articles/searchbox#using-haystack-with-django
 
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 es = urlparse(os.environ.get('SEARCHBOX_URL', 'http://127.0.0.1:9200/'))
 
