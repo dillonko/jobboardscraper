@@ -4,7 +4,7 @@
         "model": "sites.site", 
         "fields": {
             "domain": "127.0.0.1:8000",
-            "name": "example.com"
+            "name": "Job Board Scraper"
         }
     },
     {
@@ -12,7 +12,7 @@
         "model": "sites.site", 
         "fields": {
             "domain": "timgorin.herokuapp.com",
-            "name": "example.com"
+            "name": "Job Board Scraper"
         }
     }
 ]
