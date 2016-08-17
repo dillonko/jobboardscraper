@@ -7,7 +7,7 @@ TimGorin = (function ($) {
     return {
 
         openLinkInNewWindow: function () {
-            $('a.external, a[rel="external"]').on('click', function (event) {
+            $('a.js-external, a[rel="external"]').on('click', function (event) {
                 var href;
                 href = $(this).attr('href');
                 window.open(href);
