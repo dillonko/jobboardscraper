@@ -2,15 +2,15 @@
 
 {% load i18n staticfiles %}
 
-<html lang="{% get_current_language as language %}{{ language }}" dir="ltr">
+<html lang="{% get_current_language as language %}{{ language }}">
 <head>
     <meta charset="utf-8">
     <title>{% block title %}{{ request.site.name }}{% endblock %}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="apple-mobile-web-app-title" content="{{ request.site.name }}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
 </head>
 <body>
 
