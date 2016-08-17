@@ -15,14 +15,15 @@ TimGorin = (function ($) {
             });
         },
 
-        init: function () {
+        ready: function () {
             this.openLinkInNewWindow();
         }
+
     };
 
-}(window.jQuery));
+}(jQuery));
 
-jQuery(function () {
+jQuery(document).ready(function () {
     'use strict';
-    TimGorin.init();
+    TimGorin.ready();
 });
