@@ -68,24 +68,30 @@
     </div>
 </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
-            <main class="site-main">
+<main class="site-main">
+    {% block content_container %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
                 {% block content %}
                 {% endblock %}
-            </main>
+            </div>
         </div>
     </div>
+    {% endblock %}
+</main>
 
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
-            <footer class="site-footer">
-                <p><small>&copy; {% now "Y" %}. <a href="{% url 'home' %}">{{ request.site.name }}</a>.</small></p>
-            </footer>
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                {% block footer %}
+                <p>&copy; {% now "Y" %}. <a href="{% url 'home' %}">{{ request.site.name }}</a>.</p>
+                {% endblock %}
+            </div>
         </div>
     </div>
-</div>
+</footer>
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
