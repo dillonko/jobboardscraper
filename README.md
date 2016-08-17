@@ -1,12 +1,12 @@
 # Job board scraper
 
-This code scrapes a [job board](http://www.eslcafe.com/jobs/korea/) with [Scrapy](http://scrapy.org/) every day and integrates it into a [Django](https://www.djangoproject.com/) website with an [Elasticsearch](http://www.elasticsearch.org/) search index and a [PostgreSQL](http://www.postgresql.org/) database. The website is hosted on [Heroku](https://www.heroku.com/).
+This code scrapes a [job board](http://www.eslcafe.com/jobs/korea/) with [Scrapy](http://scrapy.org/) every day and integrates it into a [Django](https://www.djangoproject.com/) website with an [Elasticsearch](https://www.elastic.co/) search index and a [PostgreSQL](https://www.postgresql.org/) database. The website is hosted on [Heroku](https://www.heroku.com/).
 
 [https://timgorin.herokuapp.com](https://timgorin.herokuapp.com/)
 
 ## Install
 
-Prerequisites: [Python](https://www.python.org/), [SQLite](https://www.sqlite.org/), [pip](https://pip.pypa.io/), [virtualenv](https://virtualenv.readthedocs.org/), [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/), [Git](http://git-scm.com/).
+Prerequisites: [Python](https://www.python.org/), [SQLite](https://www.sqlite.org/), [pip](https://pip.pypa.io/), [virtualenv](https://virtualenv.readthedocs.io/), [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/), [Git](https://git-scm.com/).
 
 Your `~/.bash_profile`:
 
@@ -69,9 +69,9 @@ The code is set up to deploy to [Heroku](https://www.heroku.com/), and as such r
 
 Heroku add-ons I installed:
 
-- [Heroku Postgres](https://addons.heroku.com/heroku-postgresql)
-- [Heroku Scheduler](https://addons.heroku.com/scheduler)
-- [SearchBox Elasticsearch](https://addons.heroku.com/searchbox)
+- [Heroku Postgres](https://elements.heroku.com/addons/heroku-postgresql)
+- [Heroku Scheduler](https://elements.heroku.com/addons/scheduler)
+- [SearchBox Elasticsearch](https://elements.heroku.com/addons/searchbox)
 
 Heroku requires some [environment variables](https://devcenter.heroku.com/articles/config-vars):
 
@@ -104,7 +104,7 @@ heroku run '(cd timgorin/scraper/ && scrapy crawl eslcafe)'
 heroku run python timgorin/manage.py rebuild_index
 ```
 
-But you will more likely want to run the [Scheduler](https://scheduler.heroku.com/dashboard), which runs these tasks every day to scrape the website and update the search index:
+But you will more likely want to run the [Scheduler](https://devcenter.heroku.com/articles/scheduler#scheduling-jobs), which runs these tasks every day to scrape the website and update the search index:
 
 - `(cd scraper/ && scrapy crawl eslcafe)`
 - `python timgorin/manage.py update_index`
@@ -119,4 +119,4 @@ Resources that helped me:
 - [Python, Web scraping and content management: Scrapy and Django](http://www.slideshare.net/sammyfung/python-web-scraping-and-content-management-scrapy-and-django)
 - [Open Data, Open Government](http://www.slideshare.net/sammyfung/hk0weather-barcamp)
 - New Coder "[Web scraper](http://newcoder.io/scrape/)" tutorial by [Lynn Root](http://www.roguelynn.com/)
-- [Getting started with Django on Heroku](https://devcenter.heroku.com/articles/getting-started-with-django) by Heroku
+- [Getting started with Django on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#introduction) by Heroku
