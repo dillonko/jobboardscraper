@@ -1,6 +1,6 @@
 # Job Board Scraper
 
-*Job Board Scraper* collects, cleans, organizes, and indexes English teaching positions from an [existing online job board](http://www.eslcafe.com/jobs/korea/) once a day.
+**Job Board Scraper** collects, cleans, organizes, and indexes English teaching positions from an [existing online job board](http://www.eslcafe.com/jobs/korea/) once a day.
 
 The code scrapes the job board with [Scrapy](http://scrapy.org/) and integrates it into a [Django](https://www.djangoproject.com/) website with an [Elasticsearch](https://www.elastic.co/) search index and a [PostgreSQL](https://www.postgresql.org/) database. The website is hosted on [Heroku](https://www.heroku.com/).
 
