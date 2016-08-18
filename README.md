@@ -4,8 +4,8 @@
 
 The code scrapes the job board with [Scrapy](http://scrapy.org/) and integrates it into a [Django](https://www.djangoproject.com/) website with an [Elasticsearch](https://www.elastic.co/) search index and a [PostgreSQL](https://www.postgresql.org/) database. The website is hosted on [Heroku](https://www.heroku.com/).
 
-- [Code repository](https://github.com/richardcornish/timgorin)
-- [Deployed app](https://timgorin.herokuapp.com/)
+- [Code repository](https://github.com/richardcornish/jobboardscraper)
+- [Deployed app](https://jobboardscraper.herokuapp.com/)
 
 ## Install
 
@@ -13,13 +13,13 @@ Prerequisites: [Python 3](https://www.python.org/), [SQLite](https://www.sqlite.
 
 ```
 $ mkdir -p ~/Sites/ && cd ~/Sites/
-$ git clone git@github.com:richardcornish/timgorin.git
-$ mkvirtualenv timgorin -p /usr/local/bin/python3
-$ cd timgorin/
+$ git clone git@github.com:richardcornish/jobboardscraper.git
+$ mkvirtualenv jobboardscraper -p /usr/local/bin/python3
+$ cd jobboardscraper/
 $ pip install -r requirements.txt
-$ cd timgorin/
+$ cd jobboardscraper/
 $ python manage.py migrate
-$ python manage.py loaddata timgorin/fixtures/*
+$ python manage.py loaddata jobboardscraper/fixtures/*
 $ python manage.py createsuperuser
 $ python manage.py runserver
 ```
@@ -29,7 +29,7 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Kill with `Ctrl+C`.
 Setting a virtualenv default directory is usually a good idea:
 
 ```
-$ setvirtualenvproject $WORKON_HOME/timgorin/ ~/Sites/timgorin/timgorin/
+$ setvirtualenvproject $WORKON_HOME/jobboarscraper/ ~/Sites/jobboarscraper/jobboarscraper/
 $ cdproject
 ```
 
@@ -84,9 +84,9 @@ $ heroku addons:create heroku-postgresql:hobby-dev
 $ heroku addons:create scheduler:standard
 $ heroku addons:create searchbox:starter
 $ git push heroku master
-$ heroku run python timgorin/manage.py migrate
-$ heroku run python timgorin/manage.py loaddata timgorin/timgorin/fixtures/*
-$ heroku run python timgorin/manage.py createsuperuser
+$ heroku run python jobboardscraper/manage.py migrate
+$ heroku run python jobboardscraper/manage.py loaddata jobboardscraper/jobboardscraper/fixtures/*
+$ heroku run python jobboardscraper/manage.py createsuperuser
 $ heroku open
 ```
 
@@ -99,14 +99,14 @@ $ git push heroku master
 After installation you can scrape the website and build the search index on Heroku:
 
 ```
-$ heroku run '(cd timgorin/scraper/ && scrapy crawl eslcafe)'
-$ heroku run python timgorin/manage.py rebuild_index
+$ heroku run '(cd jobboardscraper/scraper/ && scrapy crawl eslcafe)'
+$ heroku run python jobboardscraper/manage.py rebuild_index
 ```
 
 You can run the commands manually in the future, but more likely you will want to schedule a job with [Scheduler](https://devcenter.heroku.com/articles/scheduler#scheduling-jobs), which runs these commands every day to scrape and index:
 
 - `(cd scraper/ && scrapy crawl eslcafe)`
-- `python timgorin/manage.py update_index`
+- `python jobboardscraper/manage.py update_index`
 
 You might need to edit the [SearchBox settings](https://dashboard.searchly.com/6886/indices) on your Heroku dashboard to manually register your SearchBox API key and your search index's name if it doesn't work.
 

@@ -1,6 +1,6 @@
-var TimGorin = window.TimGorin || {};
+var JobBoardScraper = window.JobBoardScraper || {};
 
-TimGorin = (function ($) {
+JobBoardScraper = (function ($) {
 
     'use strict';
 
@@ -25,5 +25,5 @@ TimGorin = (function ($) {
 
 jQuery(document).ready(function () {
     'use strict';
-    TimGorin.ready();
+    JobBoardScraper.ready();
 });

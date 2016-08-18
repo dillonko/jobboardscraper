@@ -25,7 +25,7 @@ ITEM_PIPELINES = {
 # http://doc.scrapy.org/en/latest/topics/djangoitem.html#django-settings-set-up
 
 import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'timgorin.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'jobboardscraper.settings'
 
 # Although not documented anywhere, I *think* Scrapy falls under the        
 # use case of `AppRegistryNotReady` error "if you forget to call       

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+
+{% block content_container %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-1">
+
+            <h1>{{ request.site.name }}</h1>
+
+            <p><strong>Job Board Scraper</strong> collects, cleans, organizes, and indexes English teaching positions from an <a href="http://www.eslcafe.com/jobs/korea/">existing online job board</a> once a day.</p>
+
+            <p>The code scrapes the job board with <a href="http://scrapy.org/">Scrapy</a> and integrates it into a <a href="https://www.djangoproject.com/">Django</a> website with an <a href="https://www.elastic.co/">Elasticsearch</a> search index and a <a href="https://www.postgresql.org/">PostgreSQL</a> database. The website is hosted on <a href="https://www.heroku.com/">Heroku</a>.</p>
+
+            <ul>
+                <li><a href="https://github.com/richardcornish/jobboardscraper">Code repository</a></li>
+                <li><a href="https://jobboardscraper.herokuapp.com/">Deployed app</a></li>
+            </ul>
+
+            <h2>How it works</h2>
+
+            <p>The <a href="https://github.com/richardcornish/jobboardscraper/blob/master/jobboardscraper/scraper/spiders/eslcafe.py">spider</a> is <a href="https://elements.heroku.com/addons/scheduler">scheduled</a> once a day to visit the <a href="http://www.eslcafe.com/jobs/korea/">job board website</a> and to <a href="http://doc.scrapy.org/en/1.1/topics/spiders.html">follow each job</a> via <a href="http://doc.scrapy.org/en/1.1/topics/selectors.html">XPath selection</a>.</p>
+
+            <p>The <a href="https://github.com/richardcornish/jobboardscraper/blob/master/jobboardscraper/scraper/items.py">data is mapped</a> to a <a href="https://github.com/richardcornish/jobboardscraper/blob/master/jobboardscraper/jobs/models.py">Django model</a> with the <a href="https://github.com/scrapy-plugins/scrapy-djangoitem"><code>scrapy-djangoitem</code></a> extension. Any additional fields are manually attached to the <a href="http://doc.scrapy.org/en/1.1/topics/items.html">item</a>.</p>
+
+            <p>The data is <a href="https://github.com/richardcornish/jobboardscraper/blob/master/jobboardscraper/scraper/pipelines.py">cleaned, converted, and saved</a> in a <a href="http://doc.scrapy.org/en/1.1/topics/item-pipeline.html">pipeline</a>. The code checks and prevents job duplicates from being saved. Additionally, it separates the job from the organization and stores the data in different models, normalizing the original data, which allows the ability to browse <a href="{% url 'job_list' %}">jobs</a> and <a href="{% url 'organization_list' %}">organizations</a> separately, a feature not on the original website.</p>
+
+            <p>Search is handled by <a href="http://haystacksearch.org/">Haystack</a> and <a href="https://elements.heroku.com/addons/searchbox">SearchBox</a>. To use Haystack, the code includes a <a href="https://github.com/richardcornish/jobboardscraper/blob/master/jobboardscraper/search/forms.py">search form</a>, a <a href="https://github.com/richardcornish/jobboardscraper/blob/master/jobboardscraper/search/views.py">search view</a>, a <a href="https://github.com/richardcornish/jobboardscraper/blob/master/jobboardscraper/templates/search/search.html">search template</a>, a <a href="https://github.com/richardcornish/jobboardscraper/blob/master/jobboardscraper/jobs/search_indexes.py">search index</a>, and an <a href="https://github.com/richardcornish/jobboardscraper/blob/master/jobboardscraper/templates/search/indexes/jobs/job_text.txt">index template</a>, all of which is <a href="http://django-haystack.readthedocs.io/en/latest/tutorial.html">outlined in the documentation</a>.</p>
+
+            <p>Installation and deployment instructions are in the <a href="https://github.com/richardcornish/jobboardscraper/blob/master/README.md"><code>README</code></a> of the code repository.</p>
+
+            <h2>Resources</h2>
+
+            <p>Some resources that helped me figure things out:</p>
+
+            <ul>
+                <li><a href="https://github.com/sammyfung/hk0weather">hk0weather</a>, a Hong Kong weather data project by <a href="http://sammy.hk/">Sammy Fung</a></li>
+                <li><a href="http://www.slideshare.net/sammyfung/python-web-scraping-and-content-management-scrapy-and-django">Python, Web scraping and content management: Scrapy and Django</a></li>
+                <li><a href="http://www.slideshare.net/sammyfung/hk0weather-barcamp">Open Data, Open Government</a></li>
+                <li><a href="http://newcoder.io/scrape/">Web scraper</a> tutorial by <a href="http://www.roguelynn.com/">Lynn Root</a></li>
+                <li><a href="https://devcenter.heroku.com/articles/getting-started-with-python#introduction">Getting started with Django on Heroku</a> by Heroku</li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

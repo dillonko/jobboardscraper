@@ -11,7 +11,7 @@
         "pk": 2, 
         "model": "sites.site", 
         "fields": {
-            "domain": "timgorin.herokuapp.com",
+            "domain": "jobboardscraper.herokuapp.com",
             "name": "Job Board Scraper"
         }
     }

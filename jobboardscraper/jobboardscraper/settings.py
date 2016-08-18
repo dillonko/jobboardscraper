@@ -61,7 +61,7 @@ MIDDLEWARE_CLASSES = [
     'easy_timezones.middleware.EasyTimezoneMiddleware',
 ]
 
-ROOT_URLCONF = 'timgorin.urls'
+ROOT_URLCONF = 'jobboardscraper.urls'
 
 TEMPLATES = [
     {
@@ -76,13 +76,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'timgorin.context_processors.search_form',
+                'jobboardscraper.context_processors.search_form',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'timgorin.wsgi.application'
+WSGI_APPLICATION = 'jobboardscraper.wsgi.application'
 
 
 # Database
