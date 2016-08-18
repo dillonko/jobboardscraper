@@ -103,11 +103,11 @@ $ heroku run '(cd jobboardscraper/scraper/ && scrapy crawl eslcafe)'
 $ heroku run python jobboardscraper/manage.py rebuild_index
 ```
 
-You can run the commands manually in the future, but more likely you will want to schedule a job with [Scheduler](https://devcenter.heroku.com/articles/scheduler#scheduling-jobs), which runs these commands every day to scrape and index:
+You can run the commands manually in the future, but more likely you will want to schedule a job with [Scheduler](https://scheduler.heroku.com/dashboard), which runs these commands every day to scrape and index:
 
-- `(cd scraper/ && scrapy crawl eslcafe)`
+- `(cd jobboardscraper/scraper/ && scrapy crawl eslcafe)`
 - `python jobboardscraper/manage.py update_index`
 
-You might need to edit the [SearchBox settings](https://dashboard.searchly.com/6886/indices) on your Heroku dashboard to manually register your SearchBox API key and your search index's name if it doesn't work.
+You might need to edit the [SearchBox settings](https://dashboard.searchly.com/) on your Heroku dashboard to manually register your SearchBox API key and your search index's name if it doesn't work.
 
 There is nothing Heroku specific in the code; you can schedule a `cron` for the scraping and indexing commands if you prefer.
