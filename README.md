@@ -110,4 +110,4 @@ You can run the commands manually in the future, but more likely you will want t
 
 You might need to edit the [SearchBox settings](https://dashboard.searchly.com/) on your Heroku dashboard to manually register your SearchBox API key and your search index's name if it doesn't work.
 
-There is nothing Heroku specific in the code; you can schedule a `cron` for the scraping and indexing commands if you prefer.
+There is nothing specific to Heroku in the code; you can schedule a `cron` for the scraping and indexing commands if you prefer.
