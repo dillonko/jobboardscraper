@@ -12,7 +12,7 @@ The code scrapes the job board with [Scrapy](http://scrapy.org/) and integrates 
 Prerequisites: [Python 3](https://www.python.org/), [SQLite](https://www.sqlite.org/), [pip](https://pip.pypa.io/), [virtualenv](https://virtualenv.readthedocs.io/), [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/), [Git](https://git-scm.com/).
 
 ```
-$ mkvirtualenv jobboardscraper -p /usr/local/bin/python3
+$ mkvirtualenv jobboardscraper -p python3
 $ git clone git@github.com:richardcornish/jobboardscraper.git
 $ cd jobboardscraper/
 $ pip install -r requirements.txt
