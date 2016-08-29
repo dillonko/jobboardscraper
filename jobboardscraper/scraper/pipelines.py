@@ -6,9 +6,9 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import re
-import pytz
 from datetime import datetime
 
+import pytz
 from django.utils.text import slugify
 from scrapy.exceptions import DropItem
 
@@ -26,10 +26,10 @@ class EslCafePipeline(object):
         item['pub_date'] = self.convert_to_datetime(item['pub_date'])
 
         """
-        There is no native unique identifier for each job: a job with the same 
-        title might be a job we already scraped or it can be a new job with 
-        the same title (essentially a "reposted" job); therefore we pair the 
-        job title with the published date to determine if a job is "unique 
+        There is no native unique identifier for each job: a job with the same
+        title might be a job we already scraped or it can be a new job with
+        the same title (essentially a "reposted" job); therefore we pair the
+        job title with the published date to determine if a job is "unique
         enough" to warrant a new entry
         """
         if not Job.objects.filter(title=item['title'], pub_date=item['pub_date']):
@@ -69,7 +69,7 @@ class EslCafePipeline(object):
     def convert_to_datetime(self, pub_list):
         """
         Converts messy datetime to timezone-aware datetime object;
-        the webmaster seems to live in Northridge, CA, which is near Los 
+        the webmaster seems to live in Northridge, CA, which is near Los
         Angeles and is in the Pacific Time timezone
         http://www.eslcafe.com/contact.html
         http://en.wikipedia.org/wiki/America/Los_Angeles

@@ -6,7 +6,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.core.urlresolvers import reverse_lazy
 
-from .views import FaviconView, RobotsView, HomeView
+from .views import FaviconView, HomeView, RobotsView
 
 urlpatterns = [
 

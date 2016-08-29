@@ -1,6 +1,5 @@
-from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
-from django.views.generic import TemplateView, RedirectView
+from django.views.generic import RedirectView, TemplateView
 
 
 class HomeView(TemplateView):

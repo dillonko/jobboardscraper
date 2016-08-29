@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import os
+
+import django
+
 # Scrapy settings for scraper project
 #
 # For simplicity, this file contains only the most important settings by
@@ -21,16 +25,14 @@ ITEM_PIPELINES = {
 }
 
 
-# Django Item requires explicit Django settings in Scrapy settings      
+# Django Item requires explicit Django settings in Scrapy settings
 # http://doc.scrapy.org/en/latest/topics/djangoitem.html#django-settings-set-up
 
-import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'jobboardscraper.settings'
 
-# Although not documented anywhere, I *think* Scrapy falls under the        
-# use case of `AppRegistryNotReady` error "if you forget to call       
-# django.setup() in a standalone Python script."       
+# Although not documented anywhere, I *think* Scrapy falls under the
+# use case of `AppRegistryNotReady` error "if you forget to call
+# django.setup() in a standalone Python script."
 # https://docs.djangoproject.com/en/1.7/ref/applications/#troubleshooting
 
-import django
 django.setup()
