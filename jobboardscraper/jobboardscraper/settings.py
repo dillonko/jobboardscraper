@@ -208,8 +208,3 @@ PAGINATION_SETTINGS = {
 GEOIP_DATABASE = os.path.join(PROJECT_ROOT, 'GeoLiteCity.dat')
 
 GEOIPV6_DATABASE = os.path.join(PROJECT_ROOT, 'GeoLiteCityv6.dat')
-
-
-# Other settings
-
-REMOVE_WWW = True
