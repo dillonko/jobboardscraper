@@ -176,9 +176,7 @@ DATABASES['default'].update(db_from_env)
 from urllib.parse import urlparse
 
 es = urlparse(os.environ.get('SEARCHBOX_URL', 'http://127.0.0.1:9200/'))
-
 port = es.port or 80
-
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
@@ -195,7 +193,6 @@ if es.username:
 # https://github.com/jamespacileo/django-pure-pagination
 
 PAGINATE_BY = 20
-
 PAGINATION_SETTINGS = {
     'PAGE_RANGE_DISPLAYED': 2,
     'MARGIN_PAGES_DISPLAYED': 1,
@@ -206,5 +203,27 @@ PAGINATION_SETTINGS = {
 # https://github.com/Miserlou/django-easy-timezones
 
 GEOIP_DATABASE = os.path.join(PROJECT_ROOT, 'GeoLiteCity.dat')
-
 GEOIPV6_DATABASE = os.path.join(PROJECT_ROOT, 'GeoLiteCityv6.dat')
+
+
+# Celery
+# http://docs.celeryproject.org/en/latest/index.html
+
+from celery.schedules import crontab
+
+BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERYBEAT_SCHEDULE = {
+    'scrape': {
+        'task': 'tasks.scrape_task',
+        # 'schedule': crontab(hour=12, minute=00),
+        'schedule': crontab(minute='*/5'),
+    },
+    'index': {
+        'task': 'tasks.index_task',
+        # 'schedule': crontab(hour=1, minute=00),
+        'schedule': crontab(minute='*/5'),
+    },
+}

@@ -1,4 +1,8 @@
+amqp==1.4.9
+anyjson==0.3.3
 attrs==16.0.0
+billiard==3.3.0.23
+celery==3.1.23
 cffi==1.7.0
 coverage==4.0.2
 cryptography==1.4
@@ -14,6 +18,7 @@ elasticsearch==2.3.0
 gunicorn==19.6.0
 idna==2.1
 ipaddress==1.0.14
+kombu==3.0.35
 lxml==3.6.1
 parsel==1.0.3
 psycopg2==2.6.2
@@ -25,6 +30,7 @@ pygeoip==0.3.2
 pyOpenSSL==16.0.0
 pytz==2016.6.1
 queuelib==1.4.2
+redis==2.10.5
 Scrapy==1.1.1
 scrapy-djangoitem==1.1.1
 service-identity==16.0.0
