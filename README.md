@@ -78,7 +78,6 @@ $ heroku login
 $ heroku create
 $ heroku config:set SECRET_KEY='...' # replace with your own
 $ heroku config:set DEBUG=''
-$ heroku config:set WEB_CONCURRENCY='2'
 $ heroku addons:create heroku-postgresql:hobby-dev
 $ heroku addons:create scheduler:standard
 $ heroku addons:create searchbox:starter
