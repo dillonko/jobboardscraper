@@ -220,12 +220,10 @@ CELERY_TIMEZONE = 'UTC'
 CELERYBEAT_SCHEDULE = {
     'scrape': {
         'task': 'jobs.tasks.scrape_task',
-        # 'schedule': crontab(hour=12, minute=00),
-        'schedule': crontab(minute='*/1'),
+        'schedule': crontab(hour=12, minute=00),
     },
     'index': {
         'task': 'jobs.tasks.index_task',
-        # 'schedule': crontab(hour=1, minute=00),
-        'schedule': crontab(minute='*/1'),
+        'schedule': crontab(hour=1, minute=00),
     },
 }
