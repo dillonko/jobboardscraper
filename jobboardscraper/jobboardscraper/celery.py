@@ -13,10 +13,6 @@ app = Celery('jobboardscraper')
 app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
-# https://devcenter.heroku.com/articles/celery-heroku
-app.conf.update(BROKER_URL=settings.BROKER_URL,
-                CELERY_RESULT_BACKEND=settings.CELERY_RESULT_BACKEND)
-
 
 @app.task(bind=True)
 def debug_task(self):
