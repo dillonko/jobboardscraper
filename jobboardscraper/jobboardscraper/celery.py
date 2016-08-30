@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 import os
 from celery import Celery
-from django.conf import settings  # noqa
+from django.conf import settings
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jobboardscraper.settings')
@@ -12,6 +12,10 @@ app = Celery('jobboardscraper')
 # pickle the object when using Windows.
 app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
+
+# https://devcenter.heroku.com/articles/celery-heroku
+app.conf.update(BROKER_URL=settings.BROKER_URL,
+                CELERY_RESULT_BACKEND=settings.CELERY_RESULT_BACKEND)
 
 
 @app.task(bind=True)
