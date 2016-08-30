@@ -1,13 +1,10 @@
-from celery.task.schedules import crontab
-from celery.decorators import periodic_task
+from celery import shared_task
 from haystack.management.commands import update_index
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 
-from jobboardscraper.celery import app
 
-
-@app.task
+@shared_task
 def scrape_task():
     """Celery task to scrape website with Scrapy.
 
@@ -18,7 +15,7 @@ def scrape_task():
     process.start()
 
 
-@app.task
+@shared_task
 def index_task():
     """Celery task to index website with Haystack."""
     update_index.Command().handle(using=['default'])

@@ -212,18 +212,20 @@ GEOIPV6_DATABASE = os.path.join(PROJECT_ROOT, 'GeoLiteCityv6.dat')
 from celery.schedules import crontab
 
 BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = BROKER_URL
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
 CELERYBEAT_SCHEDULE = {
     'scrape': {
         'task': 'tasks.scrape_task',
         # 'schedule': crontab(hour=12, minute=00),
-        'schedule': crontab(minute='*/5'),
+        'schedule': crontab(minute='*/1'),
     },
     'index': {
         'task': 'tasks.index_task',
         # 'schedule': crontab(hour=1, minute=00),
-        'schedule': crontab(minute='*/5'),
+        'schedule': crontab(minute='*/1'),
     },
 }
