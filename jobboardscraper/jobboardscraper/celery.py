@@ -17,3 +17,8 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 # https://devcenter.heroku.com/articles/celery-heroku
 app.conf.update(BROKER_URL=settings.BROKER_URL,
                 CELERY_RESULT_BACKEND=settings.BROKER_URL)
+
+
+@app.task(bind=True)
+def debug_task(self):
+    print('Request: {0!r}'.format(self.request))
