@@ -9,7 +9,7 @@ The code scrapes the job board with [Scrapy](http://scrapy.org/) and integrates 
 
 ## Install
 
-Prerequisites: [Python 3](https://www.python.org/), [SQLite](https://www.sqlite.org/), [pip](https://pip.pypa.io/), [virtualenv](https://virtualenv.readthedocs.io/), [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/), [Git](https://git-scm.com/).
+Prerequisites: [Python 3](https://www.python.org/), [SQLite](https://www.sqlite.org/), [Redis](http://redis.io/), [pip](https://pip.pypa.io/), [virtualenv](https://virtualenv.readthedocs.io/), [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/), [Git](https://git-scm.com/).
 
 ```
 $ mkvirtualenv jobboardscraper -p python3
@@ -68,7 +68,7 @@ If you're using Heroku, deploying requires the Heroku Toolbelt:
 Heroku add-ons I installed:
 
 - [Heroku Postgres](https://elements.heroku.com/addons/heroku-postgresql)
-- [Heroku Scheduler](https://elements.heroku.com/addons/scheduler)
+- [Heroku Redis](https://elements.heroku.com/addons/heroku-redis)
 - [SearchBox Elasticsearch](https://elements.heroku.com/addons/searchbox)
 
 Initial deploy:
@@ -80,7 +80,6 @@ $ heroku config:set SECRET_KEY='...' # replace with your own
 $ heroku config:set DEBUG=''
 $ heroku addons:create heroku-postgresql:hobby-dev
 $ heroku addons:create heroku-redis:hobby-dev
-$ heroku addons:create scheduler:standard
 $ heroku addons:create searchbox:starter
 $ git push heroku master
 $ heroku run python jobboardscraper/manage.py migrate
@@ -102,11 +101,4 @@ $ heroku run '(cd jobboardscraper/scraper/ && scrapy crawl eslcafe)'
 $ heroku run python jobboardscraper/manage.py rebuild_index
 ```
 
-You can run the commands manually in the future, but more likely you will want to schedule a job with [Scheduler](https://scheduler.heroku.com/dashboard), which runs these commands every day to scrape and index:
-
-- `(cd jobboardscraper/scraper/ && scrapy crawl eslcafe)`
-- `python jobboardscraper/manage.py update_index`
-
-You might need to edit the [SearchBox settings](https://dashboard.searchly.com/) on your Heroku dashboard to manually register your SearchBox API key and your search index's name if it doesn't work.
-
-There is nothing specific to Heroku in the code; you can schedule a `cron` for the scraping and indexing commands if you prefer.
+Future scraping and indexing are handled by daily [Celery tasks with a Redis broker](https://devcenter.heroku.com/articles/celery-heroku).
