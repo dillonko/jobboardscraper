@@ -23,10 +23,10 @@ class EslCafeSpider(CrawlSpider):
         job['title'] = response.xpath('/html/head/title/text()').extract()
         job['body'] = response.xpath('/html/body/blockquote/font').extract()
         job['url'] = response.url
-        job['pub_date'] = response.xpath('(/html/body/p)[3]/strong/br/following-sibling::text()').extract()
+        job['pub_date'] = response.xpath('(/html/body/p)[2]/strong/br/following-sibling::text()').extract()
         job['scrape_date'] = timezone.now()
         job['board_title'] = self.board_title
         job['board_url'] = self.board_url
-        job['org_title'] = response.xpath('(/html/body/p)[3]/strong/big/text()').extract()
-        job['org_email'] = response.xpath('(/html/body/p)[3]/strong/a/text()').extract()
+        job['org_title'] = response.xpath('(/html/body/p)[2]/strong/big/text()').extract()
+        job['org_email'] = response.xpath('(/html/body/p)[2]/strong/a/text()').extract()
         yield job
