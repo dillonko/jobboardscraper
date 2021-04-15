@@ -10,7 +10,7 @@ cryptography==3.3.2
 cssselect==1.0.0
 dj-database-url==0.4.1
 Django==1.11.29
-django-debug-toolbar==1.5
+django-debug-toolbar==1.11.1
 django-easy-timezones==0.7.0
 django-haystack==2.5.0
 django-pure-pagination==0.3.0
