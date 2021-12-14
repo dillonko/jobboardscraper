@@ -9,7 +9,7 @@ coverage==4.0.2
 cryptography==3.3.2
 cssselect==1.0.0
 dj-database-url==0.4.1
-Django==2.2.24
+Django==2.2.25
 django-debug-toolbar==1.5
 django-easy-timezones==0.7.0
 django-haystack==2.5.0
