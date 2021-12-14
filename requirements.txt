@@ -9,8 +9,8 @@ coverage==4.0.2
 cryptography==3.3.2
 cssselect==1.0.0
 dj-database-url==0.4.1
-Django==1.11.29
-django-debug-toolbar==1.11.1
+Django==2.2.18
+django-debug-toolbar==1.5
 django-easy-timezones==0.7.0
 django-haystack==2.5.0
 django-pure-pagination==0.3.0
@@ -21,7 +21,7 @@ idna==2.1
 incremental==16.10.1
 ipaddress==1.0.14
 kombu==3.0.35
-lxml==4.6.2
+lxml==4.6.3
 parsel==1.1.0
 psycopg2==2.6.2
 pyasn1==0.1.9
@@ -39,7 +39,7 @@ service-identity==16.0.0
 six==1.10.0
 sqlparse==0.2.1
 Twisted==20.3.0
-urllib3==1.25.9
+urllib3==1.26.5
 w3lib==1.16.0
 whitenoise==3.2.1
 zope.interface==4.3.2
