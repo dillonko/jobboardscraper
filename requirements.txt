@@ -8,9 +8,8 @@ constantly==15.1.0
 coverage==4.0.2
 cryptography==3.3.2
 cssselect==1.0.0
-Django==3.2.15
-
 dj-database==0.4.1
+
 Django==3.2.15
 
 django-debug-toolbar==1.11.1
@@ -47,3 +46,4 @@ urllib3==1.26.5
 w3lib==1.16.0
 whitenoise==3.2.1
 zope.interface==4.3.2
+wheel>=0.38.0 # not directly required, pinned by Snyk to avoid a vulnerability
