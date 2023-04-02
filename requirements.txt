@@ -11,9 +11,8 @@ cssselect==1.0.0
 Django==3.2.15
 
 dj-database==0.4.1
-
-
 Django==3.2.15
+
 django-debug-toolbar==1.11.1
 django-easy-timezones==0.7.0
 django-haystack==2.5.0
@@ -42,8 +41,7 @@ scrapy-djangoitem==1.1.1
 service-identity==16.0.0
 six==1.10.0
 sqlparse==0.4.2
-
-Twisted==22.4.0rc1
+Twisted==22.10.0rc1
 
 urllib3==1.26.5
 w3lib==1.16.0
