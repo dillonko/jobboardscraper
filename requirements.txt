@@ -11,6 +11,7 @@ cssselect==1.0.0
 dj-database==0.4.1
 
 
+
 Django==3.2.15
 
 django-debug-toolbar==1.11.1
