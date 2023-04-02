@@ -8,15 +8,7 @@ constantly==15.1.0
 coverage==4.0.2
 cryptography==3.3.2
 cssselect==1.0.0
-dj-database-url==0.4.1
-
-
-
-
-
-
-
-
+dj-database==0.1.4
 Django==3.2.14
 
 
@@ -43,9 +35,7 @@ pyOpenSSL==17.5.0
 pytz==2016.6.1
 queuelib==1.4.2
 redis==2.10.5
-
 Scrapy==2.6.0
-
 scrapy-djangoitem==1.1.1
 service-identity==16.0.0
 six==1.10.0
