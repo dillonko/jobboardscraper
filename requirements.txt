@@ -11,8 +11,6 @@ cssselect==1.0.0
 dj-database==0.1.4
 
 Django==3.2.15
-
-
 django-debug-toolbar==1.11.1
 django-easy-timezones==0.7.0
 django-haystack==2.5.0
