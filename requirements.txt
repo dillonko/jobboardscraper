@@ -9,7 +9,8 @@ coverage==4.0.2
 cryptography==3.3.2
 cssselect==1.0.0
 dj-database==0.1.4
-Django==3.2.14
+
+Django==3.2.15
 
 
 django-debug-toolbar==1.11.1
