@@ -16,7 +16,7 @@ django-haystack==2.5.0
 django-pure-pagination==0.3.0
 django-widget-tweaks==1.4.1
 elasticsearch==2.3.0
-gunicorn==19.6.0
+gunicorn==19.10.0
 idna==2.1
 incremental==16.10.1
 ipaddress==1.0.14
@@ -32,8 +32,8 @@ pygeoip==0.3.2
 pyOpenSSL==17.5.0
 pytz==2016.6.1
 queuelib==1.4.2
-redis==2.10.5
-Scrapy==2.6.0
+redis==4.3.6
+Scrapy==2.6.2
 scrapy-djangoitem==1.1.1
 service-identity==16.0.0
 six==1.10.0
