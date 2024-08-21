@@ -6,10 +6,10 @@ celery==5.2.2
 cffi==1.9.1
 constantly==15.1.0
 coverage==4.0.2
-cryptography==41.0.0
+cryptography==42.0.8
 cssselect==1.0.0
 dj-database-url==0.4.1
-Django==3.2.19
+Django==3.2.24
 django-debug-toolbar==1.11.1
 django-easy-timezones==0.7.0
 django-haystack==2.5.0
@@ -17,7 +17,7 @@ django-pure-pagination==0.3.0
 django-widget-tweaks==1.4.1
 elasticsearch==2.3.0
 gunicorn==19.10.0
-idna==2.1
+idna==3.7
 incremental==16.10.1
 ipaddress==1.0.14
 kombu==3.0.35
@@ -33,15 +33,17 @@ pyOpenSSL==17.5.0
 pytz==2016.6.1
 queuelib==1.4.2
 redis==4.3.6
-Scrapy==2.6.2
+Scrapy==2.11.2
 scrapy-djangoitem==1.1.1
 service-identity==16.0.0
 six==1.10.0
-sqlparse==0.4.4
-Twisted==22.10.0rc1
-urllib3==1.26.5
+sqlparse==0.5.0
+Twisted==24.7.0rc1
+urllib3==1.26.19
 w3lib==1.16.0
 whitenoise==3.2.1
 zope.interface==4.3.2
-setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
+setuptools>=70.0.0 # not directly required, pinned by Snyk to avoid a vulnerability
 wheel>=0.38.0 # not directly required, pinned by Snyk to avoid a vulnerability
+requests>=2.32.2 # not directly required, pinned by Snyk to avoid a vulnerability
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
