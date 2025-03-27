@@ -16,7 +16,7 @@ django-haystack==2.5.0
 django-pure-pagination==0.3.0
 django-widget-tweaks==1.4.1
 elasticsearch==2.3.0
-gunicorn==19.10.0
+gunicorn==23.0.0
 idna==2.1
 incremental==16.10.1
 ipaddress==1.0.14
