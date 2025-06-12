@@ -9,7 +9,7 @@ coverage==4.0.2
 cryptography==41.0.0
 cssselect==1.0.0
 dj-database-url==0.4.1
-Django==3.2.19
+Django==4.2.22
 django-debug-toolbar==1.11.1
 django-easy-timezones==0.7.0
 django-haystack==2.5.0
@@ -45,3 +45,4 @@ whitenoise==3.2.1
 zope.interface==4.3.2
 setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
 wheel>=0.38.0 # not directly required, pinned by Snyk to avoid a vulnerability
+requests>=2.32.4 # not directly required, pinned by Snyk to avoid a vulnerability
